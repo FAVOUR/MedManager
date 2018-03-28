@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.olijefavour.med_manager.EditorActivity"
+    tools:showIn="@layout/activity_editor">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_margin"
+        tools:context=".EditorActivity">
+
+        <!-- Overview category -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                android:text="@string/category_overview"
+                style="@style/CategoryStyle" />
+
+            <!-- Input fields -->
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:paddingLeft="4dp"
+                android:orientation="vertical">
+
+                <!-- Name field -->
+                <EditText
+                    android:id="@+id/edit_med_name"
+                    android:hint="@string/hint_medication_name"
+                    android:inputType="textCapWords"
+                    style="@style/EditorFieldStyle" />
+
+                <!-- Breed field -->
+                <EditText
+                    android:id="@+id/drug_description"
+                    android:hint="@string/hint_drug_descripton"
+                    android:inputType="textCapWords"
+                    style="@style/EditorFieldStyle" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+         <!--Measurement category-->
+        <!--<LinearLayout-->
+            <!--android:id="@+id/container_measurement"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--&lt;!&ndash; Label &ndash;&gt;-->
+            <!--<TextView-->
+                <!--android:text="@string/category_description"-->
+                <!--style="@style/CategoryStyle" />-->
+
+            <!--&lt;!&ndash; Input fields &ndash;&gt;-->
+            <!--<RelativeLayout-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="2"-->
+                <!--android:paddingLeft="4dp">-->
+
+                <!--&lt;!&ndash; Weight field &ndash;&gt;-->
+                <!--<EditText-->
+                    <!--android:id="@+id/edit_pet_weight"-->
+                    <!--android:hint="@string/hint_pet_weight"-->
+                    <!--android:inputType="number"-->
+                    <!--style="@style/EditorFieldStyle" />-->
+
+                <!--&lt;!&ndash; Units for weight (kg) &ndash;&gt;-->
+                <!--<TextView-->
+                    <!--android:id="@+id/label_weight_units"-->
+                    <!--android:text="@string/unit_pet_weight"-->
+                    <!--style="@style/EditorUnitsStyle"/>-->
+            <!--</RelativeLayout>-->
+        <!--</LinearLayout>-->
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+            <TextView
+                android:id="@+id/schedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/date_picker"
+                android:layout_alignEnd="@+id/date_picker"
+                android:layout_alignRight="@+id/date_picker"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorAccent"
+                android:textSize="18dp"
+                android:layout_marginBottom="20dp"
+                android:text="Medication Schedule" />
+            <!-- Gender category -->
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp"
+                android:padding="10dp"
+                >
+
+                <TextView
+                    android:id="@+id/start_picker_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="20dp"
+                    android:text="Start date:"/>
+
+                <TextView
+                    android:id="@+id/date_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="28/05/18" />
+
+
+                    <!-- Label -->
+                    <TextView
+                        android:id="@+id/select_interval"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginBottom="20dp"
+                        android:text="@string/category_frequency_interval"
+                        android:layout_below="@+id/start_picker_text"/>
+
+                    <!-- Input field -->
+
+
+                        <!-- Gender drop-down spinner -->
+                <Spinner
+                    android:id="@+id/spinner_interval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/frequency"
+                    android:layout_alignBottom="@+id/select_interval"
+                    android:layout_alignLeft="@+id/date_picker"
+                    android:layout_alignStart="@+id/date_picker"
+                    android:layout_alignTop="@+id/select_interval"
+                    android:paddingRight="16dp"
+                    android:spinnerMode="dropdown" />
+
+
+                <TextView
+                    android:id="@+id/end_date_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/select_interval"
+                    android:text="End date:" />
+
+                <TextView
+                    android:id="@+id/end_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/spinner_interval"
+                    android:layout_below="@+id/select_interval"
+                    android:layout_centerVertical="true"
+                    android:text="28/05/18" />
+            </RelativeLayout>
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/container_gender"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--&lt;!&ndash; Label &ndash;&gt;-->
+                <!--<TextView-->
+                    <!--android:text="@string/category_interval"-->
+                    <!--style="@style/CategoryStyle" />-->
+
+                <!--&lt;!&ndash; Input field &ndash;&gt;-->
+                <!--<LinearLayout-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="2"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--&lt;!&ndash; Gender drop-down spinner &ndash;&gt;-->
+                    <!--<Spinner-->
+                        <!--android:id="@+id/spinner_gender"-->
+                        <!--android:layout_height="48dp"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:paddingRight="16dp"-->
+                        <!--android:spinnerMode="dropdown"/>-->
+                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:padding="30dp"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                >
+
+                <TextView
+                    android:id="@+id/time_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="28/05/18" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

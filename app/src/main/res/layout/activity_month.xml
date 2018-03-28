@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    tools:context="com.example.olijefavour.med_manager.MonthActivity">
+<LinearLayout
+    android:background="#c49d9d"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+   android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/january"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="january"
+        android:layout_margin="30dp"
+        android:text="@string/january"
+        android:background="@drawable/input_background"
+        android:textColor="@color/colorPrimary"/>
+
+
+
+
+    <TextView
+            android:id="@+id/febrary"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:onClick="february"
+            android:layout_margin="30dp"
+            android:text="@string/february"
+            android:background="@drawable/input_background"
+            android:textColor="@color/colorPrimary"/>
+
+
+    <TextView
+        android:id="@+id/march"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="march"
+        android:layout_margin="30dp"
+        android:text="@string/march"
+        android:background="@drawable/input_background"
+        android:textColor="@color/colorPrimary"/>
+
+
+
+
+    <TextView
+        android:id="@+id/april"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="april"
+        android:layout_margin="30dp"
+        android:text="@string/april"
+        android:background="@drawable/input_background"
+        android:textColor="@color/colorPrimary"/>
+
+
+
+
+    <TextView
+        android:id="@+id/may"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="may"
+        android:layout_margin="30dp"
+        android:text="@string/may"
+        android:background="@drawable/input_background"
+        android:textColor="@color/colorPrimary"/>
+
+
+
+    <TextView
+        android:id="@+id/june"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="june"
+        android:layout_margin="30dp"
+        android:text="@string/june"
+        android:background="@drawable/input_background"
+        android:textColor="@color/colorPrimary"/>
+
+
+
+
+    <TextView
+        android:id="@+id/july"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="july"
+        android:layout_margin="30dp"
+        android:text="@string/july"
+        android:background="@drawable/input_background"
+        android:textColor="@color/colorPrimary"/>
+
+
+
+
+    <TextView
+        android:id="@+id/august"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="august"
+        android:layout_margin="30dp"
+        android:text="@string/august"
+        android:background="@drawable/input_background"
+        android:textColor="@color/colorPrimary"/>
+
+
+
+    <TextView
+        android:id="@+id/september"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="september"
+        android:layout_margin="30dp"
+        android:text="@string/september"
+        android:background="@drawable/input_background"
+        android:textColor="@color/colorPrimary"/>
+
+
+
+    <TextView
+        android:id="@+id/october"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="october"
+        android:layout_margin="30dp"
+        android:text="@string/october"
+        android:background="@drawable/input_background"
+        android:textColor="@color/colorPrimary"/>
+
+
+
+    <TextView
+        android:id="@+id/november"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="november"
+        android:layout_margin="30dp"
+        android:text="@string/november"
+        android:background="@drawable/input_background"
+        android:textColor="@color/colorPrimary"/>
+
+
+
+
+    <TextView
+        android:id="@+id/december"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="december"
+        android:layout_margin="30dp"
+        android:text="@string/december"
+        android:background="@drawable/input_background"
+        android:textColor="@color/colorPrimary"/>
+
+</LinearLayout>
+</ScrollView>
