@@ -290,7 +290,7 @@ public class EditorActivity extends AppCompatActivity implements
 //           View yeel = child.getChildAt(0);
 //           TextView ok=(TextView) yeel.findViewById(R.id.number_of_drugs);
 //            ok.setText("gosilla");
-            
+
            final TextView timeOfTheDay =(TextView)inflatedLayout.findViewById(R.id.time_of_the_day);
 //           TextView dosage =(TextView)inflatedLayout.findViewById(R.id.number_of_drugs);
 
