@@ -285,11 +285,11 @@ public class EditorActivity extends AppCompatActivity implements
         for (int i = 0; i < numberofTextViews; i++) {
             LayoutInflater inflater = LayoutInflater.from(this);
             View inflatedLayout= inflater.inflate(R.layout.dosage_time_list, null, false);
-           String number_of_children= Integer.toString(linearLayout.getChildCount());
-           LinearLayout child = (LinearLayout) inflatedLayout.findViewById(R.id.dosage_time);
-           View yeel = child.getChildAt(0);
-           TextView ok=(TextView) yeel.findViewById(R.id.number_of_drugs);
-            ok.setText("gosilla");
+//           String number_of_children= Integer.toString(linearLayout.getChildCount());
+//           LinearLayout child = (LinearLayout) inflatedLayout.findViewById(R.id.dosage_time);
+//           View yeel = child.getChildAt(0);
+//           TextView ok=(TextView) yeel.findViewById(R.id.number_of_drugs);
+//            ok.setText("gosilla");
            final TextView timeOfTheDay =(TextView)inflatedLayout.findViewById(R.id.time_of_the_day);
 //           TextView dosage =(TextView)inflatedLayout.findViewById(R.id.number_of_drugs);
 
