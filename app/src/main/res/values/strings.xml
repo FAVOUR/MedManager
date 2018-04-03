@@ -81,6 +81,9 @@
     <!-- Text hint for breed field in the editor [CHAR LIMIT=30] -->
     <string name="hint_drug_descripton">Description</string>
 
+    <!-- Text hint for breed field in the editor [CHAR LIMIT=30] -->
+    <string name="medication_name">Name of drug</string>
+
     <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
     <string name="hint_pet_weight">Weight</string>
 

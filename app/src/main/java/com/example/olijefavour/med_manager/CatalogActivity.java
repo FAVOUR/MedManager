@@ -1,7 +1,6 @@
 package com.example.olijefavour.med_manager;
 
 import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -68,19 +67,19 @@ private static final int PET_LOADER = 0;
         });
 
         // Find the ListView which will be populated with the pet data
-        ListView petListView = (ListView) findViewById(R.id.list);
+        ListView MedicationView = (ListView) findViewById(R.id.list);
 
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);
-        petListView.setEmptyView(emptyView);
+        MedicationView.setEmptyView(emptyView);
 
         // Setup an Adapter to create a list item for each row of pet data in the Cursor.
         // There is no pet data yet (until the loader finishes) so pass in null for the Cursor.
         mCursorAdapter = new MedCursorAdapter(this, null);
-        petListView.setAdapter(mCursorAdapter);
+        MedicationView.setAdapter(mCursorAdapter);
 
         // Setup the item click listener
-        petListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        MedicationView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 // Create new intent to go to {@link EditorActivity}
@@ -180,17 +179,17 @@ private static final int PET_LOADER = 0;
     private void insertPet() {
         // Create a ContentValues object where column names are the keys,
         // and Toto's pet attributes are the values.
-        ContentValues values = new ContentValues();
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_MEDICATION_NAME, "Toto");
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION, "Terrier");
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL, MedManagerContract.MedManagerEntry.TWICE_A_DAY);
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_PET_WEIGHT, 7);
-
-        // Insert a new row for Toto into the provider using the ContentResolver.
-        // Use the {@link MedManagerEntry#CONTENT_URI} to indicate that we want to insert
-        // into the pets database table.
-        // Receive the new content URI that will allow us to access Toto's data in the future.
-        Uri newUri = getContentResolver().insert(MedManagerContract.MedManagerEntry.CONTENT_URI, values);
+//        ContentValues values = new ContentValues();
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_MEDICATION_NAME, "Toto");
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION, "Terrier");
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL, MedManagerContract.MedManagerEntry.TWICE_A_DAY);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_PET_WEIGHT, 7);
+//
+//        // Insert a new row for Toto into the provider using the ContentResolver.
+//        // Use the {@link MedManagerEntry#CONTENT_URI} to indicate that we want to insert
+//        // into the pets database table.
+//        // Receive the new content URI that will allow us to access Toto's data in the future.
+//        Uri newUri = getContentResolver().insert(MedManagerContract.MedManagerEntry.CONTENT_URI, values);
     }
 
     /**

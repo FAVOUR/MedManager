@@ -100,7 +100,7 @@ public final class MedManagerContract {
          *
          *
          * Type: INTEGER
-         */
+//         */
         public final static String COLUMN_FREQUENCY_INTERVAL = "interval";
 
         /**
@@ -108,15 +108,51 @@ public final class MedManagerContract {
          *
          * Type: INTEGER
          */
-        public final static String COLUMN_PET_WEIGHT = "weight";
+        public final static String COLUMN_START_DAY= "start_day";
 
+        /**
+         * Weight of the pet.
+         *
+         * Type: INTEGER
+         */
+        public final static String COLUMN_START_MONTH= "start_month";
+
+
+        /**
+         * Weight of the pet.
+         *
+         * Type: INTEGER
+         */
+        public final static String COLUMN_START_YEAR= "start_year";
+
+        /**
+         * Weight of the pet.
+         *
+         * Type: INTEGER
+         */
+        public final static String COLUMN_END_DAY= "end_day";
+
+        /**
+         * Weight of the pet.
+         *
+         * Type: INTEGER
+         */
+        public final static String COLUMN_END_MONTH= "end_month";
+
+
+        /**
+         * Weight of the pet.
+         *
+         * Type: INTEGER
+         */
+        public final static String COLUMN_END_YEAR= "end_year";
 
         /**
          * Started taken the medication.
          *
          * Type: INTEGER
          */
-        public final static String COLUMN_START_DATE = "started";
+        public final static String COLUMN_START_DATE = "started_this_month";
 
 
 
@@ -127,55 +163,55 @@ public final class MedManagerContract {
          */
         public final static String COLUMN_END_DATE = "ended";
 
-        /**
-         * Stoped takinhg the medication.
-         *
-         * Type: INTEGER
-         */
-        public final static String  COLUMN_START_DAY = "sday";
-        /**
-         * Stoped takinhg the medication.
-         *
-         * Type: INTEGER
-         */
-        public final static String COLUMN_START_MONTH = "smonth";
-        /**
-         * Stoped takinhg the medication.
-         *
-         * Type: INTEGER
-         */
-        public final static String COLUMN_START_YEAR = "syear";
-
-        /**
-         * Stoped takinhg the medication.
-         *
-         * Type: INTEGER
-         */
-        public final static String  COLUMN_END_DAY = "eday";
-        /**
-         * Stoped takinhg the medication.
-         *
-         * Type: INTEGER
-         */
-        public final static String COLUMN_END_MONTH = "emonth";
-        /**
-         * Stoped takinhg the medication.
-         *
-         * Type: INTEGER
-         */
-        public final static String COLUMN_END_YEAR = "eyear";
-        /**
-         * Stoped takinhg the medication.
-         *
-         * Type: INTEGER
-         */
-        public final static String COLUMN_MILLS_TIME_START = "smiltime";
-        /**
-         * Stoped takinhg the medication.
-         *
-         * Type: INTEGER
-         */
-        public final static String COLUMN_MILLS_TIME_END = "emilltime";
+//        /**
+//         * Stoped takinhg the medication.
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String  COLUMN_START_DAY = "sday";
+//        /**
+//         * Stoped takinhg the medication.
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String COLUMN_START_MONTH = "smonth";
+//        /**
+//         * Stoped takinhg the medication.
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String COLUMN_START_YEAR = "syear";
+//
+//        /**
+//         * Stoped takinhg the medication.
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String  COLUMN_END_DAY = "eday";
+//        /**
+//         * Stoped takinhg the medication.
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String COLUMN_END_MONTH = "emonth";
+//        /**
+//         * Stoped takinhg the medication.
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String COLUMN_END_YEAR = "eyear";
+//        /**
+//         * Stoped takinhg the medication.
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String COLUMN_MILLS_TIME_START = "smiltime";
+//        /**
+//         * Stoped takinhg the medication.
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String COLUMN_MILLS_TIME_END = "emilltime";
         /**
          * Stoped takinhg the medication.
          *

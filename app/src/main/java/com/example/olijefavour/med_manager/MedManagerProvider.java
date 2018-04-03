@@ -163,10 +163,10 @@ public class MedManagerProvider extends ContentProvider {
         if (startMedication.isEmpty()) {
             throw new IllegalArgumentException("Medication requires valid weight");
         }
-        String endMedication = values.getAsString(MedManagerEntry.COLUMN_END_DATE);
-        if (endMedication.isEmpty()) {
-            throw new IllegalArgumentException("Medication requires valid weight");
-        }
+//        String endMedication = values.getAsString(MedManagerEntry.COLUMN_END_DATE);
+//        if (endMedication.isEmpty()) {
+//            throw new IllegalArgumentException("Medication requires valid weight");
+//        }
         // No need to check the breed, any value is valid (including null).
 
         // Get writable database
@@ -229,16 +229,16 @@ public class MedManagerProvider extends ContentProvider {
                 throw new IllegalArgumentException("Medication requires valid frequency_interval");
             }
         }
-
-        // If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
-        // check that the weight value is valid.
-        if (values.containsKey(MedManagerContract.MedManagerEntry.COLUMN_PET_WEIGHT)) {
-            // Check that the weight is greater than or equal to 0 kg
-            Integer weight = values.getAsInteger(MedManagerContract.MedManagerEntry.COLUMN_PET_WEIGHT);
-            if (weight != null && weight < 0) {
-                throw new IllegalArgumentException("Medication requires valid weight");
-            }
-        }
+//
+//        // If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
+//        // check that the weight value is valid.
+//        if (values.containsKey(MedManagerContract.MedManagerEntry.COLUMN_PET_WEIGHT)) {
+//            // Check that the weight is greater than or equal to 0 kg
+//            Integer weight = values.getAsInteger(MedManagerContract.MedManagerEntry.COLUMN_PET_WEIGHT);
+//            if (weight != null && weight < 0) {
+//                throw new IllegalArgumentException("Medication requires valid weight");
+//            }
+//        }
 // If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
         // check that the weight value is valid.
         if (values.containsKey(MedManagerEntry.COLUMN_START_DATE)) {
@@ -248,15 +248,45 @@ public class MedManagerProvider extends ContentProvider {
                 throw new IllegalArgumentException("Medication requires valid weight");
             }
         }
-// If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
-        // check that the weight value is valid.
-        if (values.containsKey(MedManagerEntry.COLUMN_END_DATE)) {
-            // Check that the weight is greater than or equal to 0 kg
-            String endDate = values.getAsString(MedManagerEntry.COLUMN_END_DATE);
-            if (endDate.isEmpty()) {
-                throw new IllegalArgumentException("Medication requires valid weight");
-            }
-        }
+
+////        If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
+//        // check that the weight value is valid.
+//        if (values.containsKey(MedManagerEntry.COLUMN_START_DATE)) {
+//            // Check that the weight is greater than or equal to 0 kg
+//            String startDate = values.getAsString(MedManagerEntry.COLUMN_START_DATE);
+//            if (startDate.isEmpty()) {
+//                throw new IllegalArgumentException("Medication requires valid weight");
+//            }
+//        }
+//
+// //       If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
+//        // check that the weight value is valid.
+//        if (values.containsKey(MedManagerEntry.COLUMN_START_DATE)) {
+//            // Check that the weight is greater than or equal to 0 kg
+//            String startDate = values.getAsString(MedManagerEntry.COLUMN_START_DATE);
+//            if (startDate.isEmpty()) {
+//                throw new IllegalArgumentException("Medication requires valid weight");
+//            }
+//        }
+//
+// //       If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
+//        // check that the weight value is valid.
+//        if (values.containsKey(MedManagerEntry.COLUMN_START_DATE)) {
+//            // Check that the weight is greater than or equal to 0 kg
+//            String startDate = values.getAsString(MedManagerEntry.COLUMN_START_DATE);
+//            if (startDate.isEmpty()) {
+//                throw new IllegalArgumentException("Medication requires valid weight");
+//            }
+//        }
+//// If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
+//        // check that the weight value is valid.
+//        if (values.containsKey(MedManagerEntry.COLUMN_END_DATE)) {
+//            // Check that the weight is greater than or equal to 0 kg
+//            String endDate = values.getAsString(MedManagerEntry.COLUMN_END_DATE);
+//            if (endDate.isEmpty()) {
+//                throw new IllegalArgumentException("Medication requires valid weight");
+//            }
+//        }
 
         // No need to check the breed, any value is valid (including null).
 

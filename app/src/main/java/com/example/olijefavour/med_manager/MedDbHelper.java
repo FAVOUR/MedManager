@@ -55,9 +55,11 @@ public class MedDbHelper extends SQLiteOpenHelper {
                 + MedManagerEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + MedManagerEntry.COLUMN_MEDICATION_NAME + " TEXT NOT NULL, "
                 + MedManagerEntry.COLUMN_MED_DESCRIPTION + " TEXT, "
+                + MedManagerEntry.COLUMN_START_DAY + " TEXT, "
+                + MedManagerEntry.COLUMN_START_MONTH + " TEXT, "
+                + MedManagerEntry.COLUMN_START_YEAR + " TEXT, "
                 + MedManagerEntry.COLUMN_FREQUENCY_INTERVAL + " INTEGER NOT NULL, "
-                + MedManagerEntry.COLUMN_START_DATE + " TEXT NOT NULL, "
-                + MedManagerEntry.COLUMN_END_DATE + " TEXT NOT NULL);";
+                + MedManagerEntry.COLUMN_START_DATE + " TEXT NOT NULL);";
 
         // Execute the SQL statement
         db.execSQL(SQL_CREATE_PETS_TABLE);

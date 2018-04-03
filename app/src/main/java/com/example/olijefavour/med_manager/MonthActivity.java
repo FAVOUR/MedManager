@@ -1,5 +1,6 @@
 package com.example.olijefavour.med_manager;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,9 @@ public class MonthActivity extends AppCompatActivity {
     }
 
     public void january(View view) {
+        Intent intent = new Intent(MonthActivity.this, MonthsActivity.class);
+        intent.putExtra("month", 2);
+        startActivity(intent);
     }
 
     public void february(View view) {

@@ -31,6 +31,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -39,12 +40,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -81,12 +84,21 @@ public class EditorActivity extends AppCompatActivity implements
     Calendar mCurrentDate;
 
     private int day,month,year;
-
+    private int numberofTextViews;
 
     java.sql.Time timeValue;
     SimpleDateFormat format;
     int hour, min;
-
+    public String gp;
+    private LinearLayout linearLayout;
+//
+//
+//    private RecyclerView mMainlist;
+//    private DosageAndTimeAdapter DosageAndTimeAdapter;
+//
+//    private List<DosageAndTime> listDosageAndTime;
+//    private DosageAndTime mDosageAndTime;
+    private int mInterval = MedManagerContract.MedManagerEntry.FREQUENCY;
 
 
 //    /**
@@ -94,7 +106,7 @@ public class EditorActivity extends AppCompatActivity implements
 //     * {@link MedManagerEntry#ONCE_A_DAY}, {@link MedManagerEntry#TWICE_A_DAY}, or
 //     * {@link MedManagerEntry#TRICE_A_DAY}.
 //     */
-    private int mFrequency_Interval = MedManagerContract.MedManagerEntry.FREQUENCY;
+
 
     /** Boolean flag that keeps track of whether the pet has been edited (true) or not (false) */
     private boolean mMedHasChanged = false;
@@ -121,11 +133,14 @@ public class EditorActivity extends AppCompatActivity implements
         Intent intent = getIntent();
         mCurrentMedManagerUri = intent.getData();
 
+
+
         // If the intent DOES NOT contain a pet content URI, then we know that we are
         // creating a new pet.
         if (mCurrentMedManagerUri == null) {
             // This is a new pet, so change the app bar to say "Add a Pet"
             setTitle(getString(R.string.editor_activity_title_new_pet));
+            numberofTextViews=1;
 
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
             // (It doesn't make sense to delete a pet that hasn't been created yet.)
@@ -146,29 +161,48 @@ public class EditorActivity extends AppCompatActivity implements
         mStartDate=(TextView) findViewById(R.id.date_picker);
         mEndDate=(TextView) findViewById(R.id.end_date);
 
-
         mTime=(TextView) findViewById(R.id.time_picker);
         mCurrentDate=Calendar.getInstance();
+        linearLayout=(LinearLayout)findViewById(R.id.dosage_time_);
 
         day=mCurrentDate.get(Calendar.DAY_OF_MONTH);
         month=mCurrentDate.get(Calendar.MONTH);
         year=mCurrentDate.get(Calendar.YEAR);
 
-        completeStartDate=day+"-"+ month+"-"+ year;
+
+//        month= month + 1;
+        completeStartDate = day+"/"+ month+"/"+ year;
                 mStartDate.setText(completeStartDate);
 
         hour = mCurrentDate.get(Calendar.HOUR_OF_DAY);
+        String sHour= Integer.toString(hour);
         min = mCurrentDate.get(Calendar.MINUTE);
+        String sMin= Integer.toString(min);
+//        mDosageAndTime=new DosageAndTime();
+////        mDosageAndTime.setDosage("1");
+////        mDosageAndTime.setTime("8","45");
+//        listDosageAndTime = new ArrayList<>();
+////        mMainlist.setHasFixedSize(true);
+////        listDosageAndTime.add(mDosageAndTime);
+//        LinearLayoutManager  wo=new LinearLayoutManager(this);
+//        mMainlist.setLayoutManager(wo);
+//        DosageAndTimeAdapter =new DosageAndTimeAdapter(listDosageAndTime);
+
+
+//        mMainlist.setAdapter(DosageAndTimeAdapter);
 
         mStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog mDatePickerDialog=new DatePickerDialog(EditorActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker datePicker, int year, int monthOftheYear, int dayOfTheMonth) {
-//
-
-                        mStartDate.setText(dayOfTheMonth + "/" + monthOftheYear+ "/" +  year);
+                    public void onDateSet(DatePicker datePicker, int yearChoosen, int monthOftheYear, int dayOfTheMonth) {
+                        monthOftheYear =monthOftheYear +1;
+                        month=monthOftheYear;
+                        day=dayOfTheMonth;
+                        year=yearChoosen;
+                        completeStartDate= dayOfTheMonth + "/" + monthOftheYear+ "/" + yearChoosen;
+                        mStartDate.setText(completeStartDate);
                     }
                 },year,month,day);
 
@@ -178,23 +212,23 @@ public class EditorActivity extends AppCompatActivity implements
             }
         });
 
-        mEndDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerDialog mDatePickerDialog=new DatePickerDialog(EditorActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int eYear, int eMonthOftheYear, int eDayOfTheMonth) {
+//        mEndDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                DatePickerDialog mDatePickerDialog=new DatePickerDialog(EditorActivity.this, new DatePickerDialog.OnDateSetListener() {
+//                    @Override
+//                    public void onDateSet(DatePicker datePicker, int eYear, int eMonthOftheYear, int eDayOfTheMonth) {
+////
 //
-
-                        mEndDate.setText(eDayOfTheMonth + "/" + eMonthOftheYear + "/" +  eMonthOftheYear);
-                    }
-                },year,month,day);
-
-
-                mDatePickerDialog.show();
-
-            }
-        });
+//                        mEndDate.setText(eDayOfTheMonth + "/" + eMonthOftheYear + "/" +  eMonthOftheYear);
+//                    }
+//                },year,month,day);
+//
+//
+//                mDatePickerDialog.show();
+//
+//            }
+//        });
 
 
         //Time picker
@@ -236,7 +270,89 @@ public class EditorActivity extends AppCompatActivity implements
         mFrequencySpinner.setOnTouchListener(mTouchListener);
 
         setupSpinner();
+
+
     }
+
+
+    private void deleteViews() {
+////        now to remove the whole layout
+        linearLayout.removeAllViews();
+    }
+
+        private void setupTextViews(int numberofTextViews) {
+
+        for (int i = 0; i < numberofTextViews; i++) {
+            LayoutInflater inflater = LayoutInflater.from(this);
+            View inflatedLayout= inflater.inflate(R.layout.dosage_time_list, null, false);
+           String number_of_children= Integer.toString(linearLayout.getChildCount());
+           LinearLayout child = (LinearLayout) inflatedLayout.findViewById(R.id.dosage_time);
+           View yeel = child.getChildAt(0);
+           TextView ok=(TextView) yeel.findViewById(R.id.number_of_drugs);
+            ok.setText("gosilla");
+           final TextView timeOfTheDay =(TextView)inflatedLayout.findViewById(R.id.time_of_the_day);
+//           TextView dosage =(TextView)inflatedLayout.findViewById(R.id.number_of_drugs);
+
+
+            timeOfTheDay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    TimePickerDialog td = new TimePickerDialog(EditorActivity.this,new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            try {
+                                String dtStart = String.valueOf(hourOfDay) + ":" + String.valueOf(minute);
+                                format = new SimpleDateFormat("HH:mm");
+
+                                timeValue = new java.sql.Time(format.parse(dtStart).getTime());
+//
+                                String     amPm   = hourOfDay % 12 + ":" + minute + " " + ((hourOfDay >= 12) ? "PM" : "AM");
+                                gp=amPm;
+                                timeOfTheDay.setText(amPm );
+//                                mTime.setText(amPm + "\n" + String.valueOf(timeValue));
+                            } catch (Exception ex) {
+                                timeOfTheDay.setText(ex.getMessage().toString());
+                            }
+                        }
+                    },
+                            hour, min,
+                            DateFormat.is24HourFormat(EditorActivity.this)
+                    );
+                    td.show();
+                }
+            });
+
+
+//            String output = getNumbers(gp);
+//            dosage.setText(output);
+//          String done= timeOfTheDay.getText().toString();
+
+            linearLayout.addView(inflatedLayout);
+            ArrayList<LinearLayout> infaltedParentView=new ArrayList<>();
+
+
+        }
+    }
+
+//        TextView textView1 = new TextView(this);
+//        textView1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+//                LinearLayout.LayoutParams.WRAP_CONTENT));
+//        textView1.setText("programmatically created TextView1");
+//        textView1.setBackgroundColor(0xff66ff66); // hex color 0xAARRGGBB
+//        textView1.setPadding(20, 20, 20, 20);// in pixels (left, top, right, bottom)
+//        linearLayout.addView(textView1);
+
+
+//kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk;
+
+
+//    private String getNumbers(String data){
+//        String [] yo= data.split(":");
+//      String go= yo[1] +", " +yo[2]  +", " +yo[3];
+//      return go;
+//    }
 
     /**
      * Setup the dropdown spinner that allows the user to select the gender of the pet.
@@ -259,71 +375,91 @@ public class EditorActivity extends AppCompatActivity implements
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selection = (String) parent.getItemAtPosition(position);
                 if (!TextUtils.isEmpty(selection)) {
+
                     switch (position) {
                         // Respond to a click on the "Save" menu option
                         case 1:
                             // Save pet to database
-                            mFrequency_Interval = MedManagerContract.MedManagerEntry.ONCE_A_DAY;
+                            deleteViews();
+                            mInterval = MedManagerContract.MedManagerEntry.ONCE_A_DAY;
+                            setupTextViews(1);
                             mEndDate.setText(selection);
+
                             break;
                         case 2:
+                            deleteViews();
                             // Save pet to database
-                            mFrequency_Interval = MedManagerContract.MedManagerEntry.TWICE_A_DAY;
+                            mInterval = MedManagerContract.MedManagerEntry.TWICE_A_DAY;
+                            setupTextViews(2);
                             mEndDate.setText(selection);
                             break;
                         case 3:
                             // Save pet to database
-                            mFrequency_Interval = MedManagerContract.MedManagerEntry.TRICE_A_DAY;
+                            deleteViews();
+                            mInterval = MedManagerContract.MedManagerEntry.TRICE_A_DAY;
+                            setupTextViews(3);
                             mEndDate.setText(selection);
 
                             break;
                         case 4:
                             // Save pet to database
-                            mFrequency_Interval = MedManagerContract.MedManagerEntry.FOUR_TIMES_A_DAY;
+                            deleteViews();
+                            mInterval = MedManagerContract.MedManagerEntry.FOUR_TIMES_A_DAY;
+                            setupTextViews(4);
                             mEndDate.setText(selection);
                             break;
                         case 5:
                             // Save pet to database
-                            mFrequency_Interval = MedManagerContract.MedManagerEntry.FIVE_TIMES_A_DAY;
+                            deleteViews();
+                            mInterval = MedManagerContract.MedManagerEntry.FIVE_TIMES_A_DAY;
+                            setupTextViews(5);
                             mEndDate.setText(selection);
                             break;
                         case 6:
                             // Save pet to database
-                            mFrequency_Interval = MedManagerContract.MedManagerEntry.SIX_TIMES_A_DAY;
+                            deleteViews();
+                            mInterval = MedManagerContract.MedManagerEntry.SIX_TIMES_A_DAY;
                             mEndDate.setText(selection);
                             break;
                         case 7:
                             // Save pet to database
-                            mFrequency_Interval = MedManagerContract.MedManagerEntry.SEVEN_TIMES_A_DAY;
+                            deleteViews();
+                            mInterval = MedManagerContract.MedManagerEntry.SEVEN_TIMES_A_DAY;
                             mEndDate.setText(selection);
                             break;
                         case 8:
                             // Save pet to database
-                            mFrequency_Interval = MedManagerContract.MedManagerEntry.EIGHT_TIMES__A_DAY;
+                            deleteViews();
+                            mInterval = MedManagerContract.MedManagerEntry.EIGHT_TIMES__A_DAY;
                             mEndDate.setText(selection);
                             break;
                         case 9:
                             // Save pet to database
-                            mFrequency_Interval = MedManagerContract.MedManagerEntry.NINE_TIMES_A_DAY;
+                            deleteViews();
+                            mInterval = MedManagerContract.MedManagerEntry.NINE_TIMES_A_DAY;
                             mEndDate.setText(selection);
                             break;
                             case 10:
                             // Save pet to database
-                            mFrequency_Interval = MedManagerContract.MedManagerEntry.TEN_TIMES_A_DAY;
+                                deleteViews();
+                            mInterval = MedManagerContract.MedManagerEntry.TEN_TIMES_A_DAY;
                             mEndDate.setText(selection);
                             break;
                         case 11:
                             // Save pet to database
-                            mFrequency_Interval = MedManagerContract.MedManagerEntry.ELEVEN_TIMES_A_DAY;
+                            deleteViews();
+                            mInterval = MedManagerContract.MedManagerEntry.ELEVEN_TIMES_A_DAY;
                             mEndDate.setText(selection);
                             break;
                         case 12:
-                            // Save pet to database
-                            mFrequency_Interval = MedManagerContract.MedManagerEntry.TWELVE_TIMES_A_DAY;
+                            // Save pet to
+                            deleteViews();
+                            mInterval = MedManagerContract.MedManagerEntry.TWELVE_TIMES_A_DAY;
                             mEndDate.setText(selection);
                             break;
                         default:
-                            mFrequency_Interval = MedManagerContract.MedManagerEntry.FREQUENCY;
+                            deleteViews();
+                            mInterval = MedManagerContract.MedManagerEntry.FREQUENCY;
                             mEndDate.setText(selection);
                             break;
 
@@ -341,7 +477,7 @@ public class EditorActivity extends AppCompatActivity implements
             // Because AdapterView is an abstract class, onNothingSelected must be defined
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                mFrequency_Interval = MedManagerContract.MedManagerEntry.FREQUENCY;
+                mInterval = MedManagerContract.MedManagerEntry.FREQUENCY;
             }
         });
     }
@@ -363,7 +499,7 @@ public class EditorActivity extends AppCompatActivity implements
         if (mCurrentMedManagerUri == null &&
                 TextUtils.isEmpty(name) && TextUtils.isEmpty(description) &&
                 TextUtils.isEmpty(startDate) && TextUtils.isEmpty(endDate)&&
-                mFrequency_Interval == MedManagerContract.MedManagerEntry.FREQUENCY) {
+                mInterval == MedManagerContract.MedManagerEntry.FREQUENCY) {
             // Since no fields were modified, we can return early without creating a new pet.
             // No need to create ContentValues and no need to do any ContentProvider operations.
             return;
@@ -374,13 +510,15 @@ public class EditorActivity extends AppCompatActivity implements
         ContentValues values = new ContentValues();
         values.put(MedManagerContract.MedManagerEntry.COLUMN_MEDICATION_NAME, name);
         values.put(MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION, description);
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL, mFrequency_Interval);
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_DAY, completeStartDate);
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_MONTH, endDate);
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_YEAR, completeStartDate);
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_DAY, endDate);
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_MONTH, completeStartDate);
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_YEAR, endDate);
+        values.put(MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL, mInterval);
+        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_DATE, completeStartDate);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_DATE, endDate);
+        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_DAY, day);
+        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_MONTH, month);
+        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_YEAR, year);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_DAY, endDate);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_MONTH, completeStartDate);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_YEAR, endDate);
 //        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_DAY, completeStartDate);
 //        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_DATE, endDate);
 //        // If the weight is not provided by the user, don't try to parse the string into an
@@ -399,11 +537,13 @@ public class EditorActivity extends AppCompatActivity implements
 
             // Show a toast message depending on whether or not the insertion was successful.
             if (newUri == null) {
+
                 // If the new content URI is null, then there was an error with insertion.
                 Toast.makeText(this, getString(R.string.editor_insert_pet_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the insertion was successful and we can display a toast.
+                Toast.makeText(this, name + description+ mInterval+completeStartDate,Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, getString(R.string.editor_insert_pet_successful),
                         Toast.LENGTH_SHORT).show();
             }
@@ -529,7 +669,10 @@ public class EditorActivity extends AppCompatActivity implements
                 MedManagerContract.MedManagerEntry.COLUMN_MEDICATION_NAME,
                 MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION,
                 MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL,
-                MedManagerContract.MedManagerEntry.COLUMN_END_DATE,
+                MedManagerContract.MedManagerEntry.COLUMN_START_DAY,
+                MedManagerContract.MedManagerEntry.COLUMN_START_MONTH,
+                MedManagerContract.MedManagerEntry.COLUMN_START_YEAR,
+//                MedManagerContract.MedManagerEntry.COLUMN_END_DATE,
                 MedManagerContract.MedManagerEntry.COLUMN_START_DATE };
 
         // This loader will execute the ContentProvider's query method on a background thread
@@ -556,25 +699,33 @@ public class EditorActivity extends AppCompatActivity implements
             int DescriptionColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION);
             int FrequencyColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL);
             int startDateColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_DATE);
-            int endDateColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_END_DATE);
+            int startDayColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_DAY);
+            int startMonthColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_MONTH);
+            int startYearColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_YEAR);
+
+//            int endDateColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_END_DATE);
 
             // Extract out the value from the Cursor for the given column index
             String Medname = cursor.getString(medNameColumnIndex);
             String Description = cursor.getString(DescriptionColumnIndex);
-            int Frequency = cursor.getInt(FrequencyColumnIndex);
-            int startDate = cursor.getInt(startDateColumnIndex);
-            int endDate = cursor.getInt(endDateColumnIndex);
+            int frequency = cursor.getInt(FrequencyColumnIndex);
+            String startDate = cursor.getString(startDateColumnIndex);
+            String startDay = cursor.getString(startDayColumnIndex);
+            int startMonth = cursor.getInt(startMonthColumnIndex);
+            String startYear = cursor.getString(startYearColumnIndex);
+//            String  endDate = cursor.getString(endDateColumnIndex);
 
             // Update the views on the screen with the values from the database
             mNameEditText.setText(Medname);
             mDescriptionEditText.setText(Description);
-            mStartDate.setText(Integer.toString(startDate));
-            mEndDate.setText(Integer.toString(endDate));
+            mStartDate.setText(startDate);
+
+            mEndDate.setText(startDay+startMonth+startYear);
 
             // Gender is a dropdown spinner, so map the constant value from the database
             // into one of the dropdown options (0 is Unknown, 1 is Male, 2 is Female).
             // Then call setSelection() so that option is displayed on screen as the current selection.
-            switch (Frequency) {
+            switch (frequency) {
                 case MedManagerContract.MedManagerEntry.ONCE_A_DAY:
                     mFrequencySpinner.setSelection(1);
                     break;

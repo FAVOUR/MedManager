@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.olijefavour.med_manager.EditorActivity"
-    tools:showIn="@layout/activity_editor">
+
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -35,7 +28,6 @@
                 android:layout_weight="2"
                 android:paddingLeft="4dp"
                 android:orientation="vertical">
-
                 <!-- Name field -->
                 <EditText
                     android:id="@+id/edit_med_name"
@@ -87,7 +79,6 @@
                     <!--style="@style/EditorUnitsStyle"/>-->
             <!--</RelativeLayout>-->
         <!--</LinearLayout>-->
-
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -131,7 +122,13 @@
                     android:layout_centerHorizontal="true"
                     android:text="28/05/18" />
 
-
+                <LinearLayout android:id="@+id/dosage_time_"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_below="@+id/start_picker_text"
+                         android:orientation="vertical"
+                          />
+                <!--layout="@layout/dosage_time_list"-->
                     <!-- Label -->
                     <TextView
                         android:id="@+id/select_interval"
@@ -140,7 +137,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_marginBottom="20dp"
                         android:text="@string/category_frequency_interval"
-                        android:layout_below="@+id/start_picker_text"/>
+                        android:layout_below="@+id/dosage_time_"/>
 
                     <!-- Input field -->
 
@@ -152,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:prompt="@string/frequency"
                     android:layout_alignBottom="@+id/select_interval"
-                    android:layout_alignLeft="@+id/date_picker"
+                    android:layout_alignLeft="@+id/select_interval"
                     android:layout_alignStart="@+id/date_picker"
                     android:layout_alignTop="@+id/select_interval"
                     android:paddingRight="16dp"
@@ -227,5 +224,3 @@
             </RelativeLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
-
-</android.support.constraint.ConstraintLayout>
