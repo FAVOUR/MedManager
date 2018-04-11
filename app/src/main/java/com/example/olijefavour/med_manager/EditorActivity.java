@@ -187,7 +187,7 @@ public class EditorActivity extends AppCompatActivity implements
         mNumberOfDaysFromStartDay = (EditText) findViewById(R.id.number_of_days);
 
         Date todaysDate = mCurrentDate.getTime();
-//        ?????????? if text is not set then
+
         dateToShow = convertDateTo.format(todaysDate);
                 mStartDate.setText(dateToShow);
 
@@ -243,10 +243,7 @@ public class EditorActivity extends AppCompatActivity implements
         mStartDate.setOnTouchListener(mTouchListener);
         mEndDate.setOnTouchListener(mTouchListener);
         mFrequencySpinner.setOnTouchListener(mTouchListener);
-
         setupSpinner();
-
-
     }
 
 
@@ -417,12 +414,11 @@ public class EditorActivity extends AppCompatActivity implements
         return date_time;
     }
     private void saveDosageAndTime(ArrayList<String> allDosageAndTime){
-        String goal="";
         for(String eachDosageAndTime : allDosageAndTime){
             getNumbers(eachDosageAndTime);
             Toast.makeText(getBaseContext(), dosage + " " + time,Toast.LENGTH_SHORT).show();
         }
-//        return goal;
+
     }
 
 
@@ -547,7 +543,7 @@ public class EditorActivity extends AppCompatActivity implements
                             // Save pet to database
                             clearViews();
                             mInterval = MedManagerContract.MedManagerEntry.ELEVEN_TIMES_A_DAY;
-                            setupTextViews(5);
+                            setupTextViews(11);
                             toSave= iteratethroughViews(infaltedParentView);
                             saveDosageAndTime(toSave);
                             break;
@@ -555,7 +551,7 @@ public class EditorActivity extends AppCompatActivity implements
                             // Save pet to
                             clearViews();
                             mInterval = MedManagerContract.MedManagerEntry.TWELVE_TIMES_A_DAY;
-                            setupTextViews(5);
+                            setupTextViews(12);
                             toSave= iteratethroughViews(infaltedParentView);
                             saveDosageAndTime(toSave);
                             break;
@@ -594,18 +590,18 @@ public class EditorActivity extends AppCompatActivity implements
         } catch (ParseException e) {
             e.printStackTrace();
         }
-//        stopes
-//        String endDate = mEndDate.getText().toString().trim();
 
-//        try {
-//            SimpleDateFormat convertDateFrom = new SimpleDateFormat("dd/MM/yyyy");
-//            Date date= convertDateFrom.parse(endDate);
-//            calEndDate.setTime(date);
-//            dbEndDate = String.valueOf(calEndDate.getTimeInMillis());
-//
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
+        String endDate = mEndDate.getText().toString().trim();
+
+        try {
+            SimpleDateFormat convertDateFrom = new SimpleDateFormat("dd/MM/yyyy");
+            Date date= convertDateFrom.parse(endDate);
+            calEndDate.setTime(date);
+            dbEndDate = String.valueOf(calEndDate.getTimeInMillis());
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         // Check if this is supposed to be a new pet
         // and check if all the fields in the editor are blank
         if (mCurrentMedManagerUri == null &&
@@ -616,7 +612,6 @@ public class EditorActivity extends AppCompatActivity implements
             // No need to create ContentValues and no need to do any ContentProvider operations.
             return;
         }
-
         // Create a ContentValues object where column names are the keys,
         // and pet attributes from the editor are the values.
         ContentValues values = new ContentValues();
@@ -624,15 +619,15 @@ public class EditorActivity extends AppCompatActivity implements
         values.put(MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION, description);
         values.put(MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL, mInterval);
         values.put(MedManagerContract.MedManagerEntry.COLUMN_START_DATE, dbStartDate);
-//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_DATE, dbEndDate);
-//        values.put(MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS,numberOfMedDays);
+        values.put(MedManagerContract.MedManagerEntry.COLUMN_MED_END_DATE, "ffhyfyfy45454");
+        values.put(MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS,numberOfMedDays);
 //        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_MONTH, month);
 //        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_YEAR, year);
 //        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_DAY, calEndDate);
 //        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_MONTH, dateToShow);
 //        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_YEAR, calEndDate);
 //        values.put(MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS, dateToShow);
-//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_DATE, calEndDate);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_MED_END_DATE, calEndDate);
 //        // If the weight is not provided by the user, don't try to parse the string into an
 //        // integer value. Use 0 by default.
 //        int weight = 0;
@@ -652,7 +647,7 @@ public class EditorActivity extends AppCompatActivity implements
                 Toast.makeText(this, name+" ---- "+  description+ " ---- "+ mInterval+ " ---- "+ dbStartDate+ " ---- "+
                         dbEndDate+ " ---- "+   numberOfMedDays+ " ---- "+   month+ " ---- "+year,Toast.LENGTH_SHORT).show();
                 // If the new content URI is null, then there was an error with insertion.
-                Toast.makeText(this, getString(R.string.editor_insert_pet_failed),
+                Toast.makeText(this, "Error",
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the insertion was successful and we can display a toast.
@@ -785,7 +780,7 @@ public class EditorActivity extends AppCompatActivity implements
 //                MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS,
 //                MedManagerContract.MedManagerEntry.COLUMN_START_MONTH,
 //                MedManagerContract.MedManagerEntry.COLUMN_START_YEAR,
-//                MedManagerContract.MedManagerEntry.COLUMN_END_DATE,
+//                MedManagerContract.MedManagerEntry.COLUMN_MED_END_DATE,
                 MedManagerContract.MedManagerEntry.COLUMN_START_DATE,
                 MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL,};
 
@@ -813,12 +808,12 @@ public class EditorActivity extends AppCompatActivity implements
             int DescriptionColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION);
             int FrequencyColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL);
             int startDateColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_DATE);
-//            int endDateColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_END_DATE);
+//            int endDateColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MED_END_DATE);
 //            int startDayColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS);
 //            int startMonthColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_MONTH);
 //            int startYearColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_YEAR);
 
-//            int endDateColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_END_DATE);
+//            int endDateColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MED_END_DATE);
 
             // Extract out the value from the Cursor for the given column index
             String Medname = cursor.getString(medNameColumnIndex);
@@ -884,6 +879,12 @@ public class EditorActivity extends AppCompatActivity implements
                     break;
                 case MedManagerContract.MedManagerEntry.TEN_TIMES_A_DAY:
                     mFrequencySpinner.setSelection(10);
+                    break;
+                case MedManagerContract.MedManagerEntry.ELEVEN_TIMES_A_DAY:
+                    mFrequencySpinner.setSelection(11);
+                    break;
+                case MedManagerContract.MedManagerEntry.TWELVE_TIMES_A_DAY:
+                    mFrequencySpinner.setSelection(12);
                     break;
 
                 default:

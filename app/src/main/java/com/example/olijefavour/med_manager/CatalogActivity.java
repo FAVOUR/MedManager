@@ -232,7 +232,9 @@ private static final int PET_LOADER = 0;
         String[] projection = {
                 MedManagerContract.MedManagerEntry._ID,
                 MedManagerContract.MedManagerEntry.COLUMN_MEDICATION_NAME,
-                MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION};
+                MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION,
+                MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS
+        };
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context

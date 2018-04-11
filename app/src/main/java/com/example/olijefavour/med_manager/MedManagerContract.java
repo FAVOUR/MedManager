@@ -108,44 +108,44 @@ public final class MedManagerContract {
          *
          * Type: INTEGER
          */
-        public final static String COLUMN_NUMBER_OF_MED_DAYS = "start_day";
+        public final static String COLUMN_NUMBER_OF_MED_DAYS = "duration_of_medication";
 
-        /**
-         * Weight of the pet.
-         *
-         * Type: INTEGER
-         */
-        public final static String COLUMN_START_MONTH= "start_month";
-
-
-        /**
-         * Weight of the pet.
-         *
-         * Type: INTEGER
-         */
-        public final static String COLUMN_START_YEAR= "start_year";
-
-        /**
-         * Weight of the pet.
-         *
-         * Type: INTEGER
-         */
-        public final static String COLUMN_END_DAY= "end_day";
-
-        /**
-         * Weight of the pet.
-         *
-         * Type: INTEGER
-         */
-        public final static String COLUMN_END_MONTH= "end_month";
+//        /**
+//         * Weight of the pet.
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String COLUMN_START_MONTH= "start_month";
 
 
-        /**
-         * Weight of the pet.
-         *
-         * Type: INTEGER
-         */
-        public final static String COLUMN_END_YEAR= "end_year";
+//        /**
+//         * Weight of the pet.
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String COLUMN_START_YEAR= "start_year";
+
+//        /**
+//         * Weight of the pet.
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String COLUMN_END_DAY= "end_day";
+
+//        /**
+//         * Weight of the pet.
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String COLUMN_END_MONTH= "end_month";
+
+
+//        /**
+//         * Weight of the pet.
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String COLUMN_END_YEAR= "end_year";
 
         /**
          * Started taken the medication.
@@ -161,7 +161,7 @@ public final class MedManagerContract {
          *
          * Type: INTEGER
          */
-//        public final static String COLUMN_END_DATE = "ended";
+        public final static String COLUMN_MED_END_DATE = "med_ends";
 
 //        /**
 //         * Stoped takinhg the medication.
@@ -212,12 +212,12 @@ public final class MedManagerContract {
 //         * Type: INTEGER
 //         */
 //        public final static String COLUMN_MILLS_TIME_END = "emilltime";
-        /**
-         * Stoped takinhg the medication.
-         *
-         * Type: INTEGER
-         */
-        public final static String COLUMN_TIME_FREQUENCY = "timefreq";
+//        /**
+//         * Stoped takinhg the medication.
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String COLUMN_TIME_FREQUENCY = "timefreq";
         /**
          * Possible frequencies.
          */
