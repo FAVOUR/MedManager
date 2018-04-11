@@ -87,7 +87,6 @@ public class EditorActivity extends AppCompatActivity implements
 
     String dateToShow;
 
-    TextView mTime;
     Calendar mCurrentDate;
 
     private int currentDay,month,year;
@@ -235,33 +234,6 @@ public class EditorActivity extends AppCompatActivity implements
         });
 
         mNumberOfDaysFromStartDay.addTextChangedListener(numberOfDaysWatcher);
-        //Time picker
-       mTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                TimePickerDialog td = new TimePickerDialog(EditorActivity.this,new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                try {
-                                    String dtStart = String.valueOf(hourOfDay) + ":" + String.valueOf(minute);
-                                    format = new SimpleDateFormat("HH:mm");
-                                    timeValue = new java.sql.Time(format.parse(dtStart).getTime());
-                                    mTime.setText(String.valueOf(timeValue));
-                                    String amPm = hourOfDay % 12 + ":" + minute + " " + ((hourOfDay >= 12) ? "PM" : "AM");
-                                    mTime.setText(amPm + "\n" + String.valueOf(timeValue));
-                                } catch (Exception ex) {
-                                    mTime.setText(ex.getMessage().toString());
-                                }
-                            }
-                        },
-                        hour, min,
-                        DateFormat.is24HourFormat(EditorActivity.this)
-                );
-                td.show();
-            }
-        });
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
@@ -452,16 +424,6 @@ public class EditorActivity extends AppCompatActivity implements
         }
 //        return goal;
     }
-//        TextView textView1 = new TextView(this);
-//        textView1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT));
-//        textView1.setText("programmatically created TextView1");
-//        textView1.setBackgroundColor(0xff66ff66); // hex color 0xAARRGGBB
-//        textView1.setPadding(20, 20, 20, 20);// in pixels (left, top, right, bottom)
-//        linearLayout.addView(textView1);
-
-
-//kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk;
 
 
     private void getNumbers(String data){
