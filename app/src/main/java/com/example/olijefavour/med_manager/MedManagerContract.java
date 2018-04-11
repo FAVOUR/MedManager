@@ -108,7 +108,7 @@ public final class MedManagerContract {
          *
          * Type: INTEGER
          */
-        public final static String COLUMN_START_DAY= "start_day";
+        public final static String COLUMN_NUMBER_OF_MED_DAYS = "start_day";
 
         /**
          * Weight of the pet.
@@ -161,14 +161,14 @@ public final class MedManagerContract {
          *
          * Type: INTEGER
          */
-        public final static String COLUMN_END_DATE = "ended";
+//        public final static String COLUMN_END_DATE = "ended";
 
 //        /**
 //         * Stoped takinhg the medication.
 //         *
 //         * Type: INTEGER
 //         */
-//        public final static String  COLUMN_START_DAY = "sday";
+//        public final static String  COLUMN_NUMBER_OF_MED_DAYS = "sday";
 //        /**
 //         * Stoped takinhg the medication.
 //         *

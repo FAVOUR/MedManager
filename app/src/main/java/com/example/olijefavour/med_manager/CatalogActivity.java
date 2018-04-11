@@ -61,7 +61,7 @@ private static final int PET_LOADER = 0;
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CatalogActivity.this, MonthActivity.class);
+                Intent intent = new Intent(CatalogActivity.this, Month2Activity.class);
                 startActivity(intent);
             }
         });
@@ -95,7 +95,7 @@ private static final int PET_LOADER = 0;
                 // Set the URI on the data field of the intent
                 intent.setData(currentPetUri);
 
-                // Launch the {@link EditorActivity} to display the data for the current pet.
+                // Launch the {@link EditorActivity} to display the data for the current medication.
                 startActivity(intent);
             }
         });
@@ -255,32 +255,6 @@ private static final int PET_LOADER = 0;
         mCursorAdapter.swapCursor(null);
     }
 
-    private ArrayList getMedicationTimes(int startTime, int frequency){
-        int numberOfTimesToBeAdded;
-        int timeDifference;
-        int interval;
-        ArrayList timeList = new ArrayList();
-        timeList.add(startTime);
-
-          numberOfTimesToBeAdded = frequency - 1;
-
-          timeDifference= 23 - startTime;
-
-          interval = timeDifference % numberOfTimesToBeAdded;
-
-          while(timeList.size() < frequency) {
-             int lastTimeAdded = (Integer) timeList.get((timeList.size() - 1));
-
-             timeList.add(lastTimeAdded + interval);
-
-             String test = "Test-strig-this";
-
-             String[] splittedTest = test.split("-");
-
-         }
-
-         return timeList;
-    }
 }
 
 

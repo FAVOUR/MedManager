@@ -29,7 +29,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -46,9 +48,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Allows user to create a new pet or edit an existing one.
@@ -78,12 +82,15 @@ public class EditorActivity extends AppCompatActivity implements
     /** EditText field to enter the pet's breed */
     private TextView mEndDate;
 
-    String completeStartDate;
+    /** EditText field to enter the number of days from start date */
+    private EditText mNumberOfDaysFromStartDay;
+
+    String dateToShow;
 
     TextView mTime;
     Calendar mCurrentDate;
 
-    private int day,month,year;
+    private int currentDay,month,year;
     private int numberofTextViews;
 
     java.sql.Time timeValue;
@@ -91,21 +98,24 @@ public class EditorActivity extends AppCompatActivity implements
     int hour, min;
     public String gp;
     private LinearLayout linearLayout;
-//
-//
-//    private RecyclerView mMainlist;
-//    private DosageAndTimeAdapter DosageAndTimeAdapter;
-//
-//    private List<DosageAndTime> listDosageAndTime;
-//    private DosageAndTime mDosageAndTime;
+
+   private  ArrayList<View> infaltedParentView = new ArrayList<>();
+    private  ArrayList<String> date_time = new ArrayList<>();
+    ArrayList<String>toSave=new ArrayList<>();
+
+    private String dosage="";
+    private String time ="";
+
+    SimpleDateFormat convertDateFrom;
+    SimpleDateFormat convertDateTo;
+
+    String dbStartDate;
+
     private int mInterval = MedManagerContract.MedManagerEntry.FREQUENCY;
 
+    private int numberOfMedDays;
 
-//    /**
-//     * Gender of the pet. The possible valid values are in the MedManagerContract.java file:
-//     * {@link MedManagerEntry#ONCE_A_DAY}, {@link MedManagerEntry#TWICE_A_DAY}, or
-//     * {@link MedManagerEntry#TRICE_A_DAY}.
-//     */
+    private Calendar calEndDate;
 
 
     /** Boolean flag that keeps track of whether the pet has been edited (true) or not (false) */
@@ -122,6 +132,8 @@ public class EditorActivity extends AppCompatActivity implements
             return false;
         }
     };
+    private int medicationDaysfromNow;
+    private String dbEndDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,38 +170,34 @@ public class EditorActivity extends AppCompatActivity implements
         mNameEditText = (EditText) findViewById(R.id.edit_med_name);
         mDescriptionEditText = (EditText) findViewById(R.id.drug_description);
         mFrequencySpinner = (Spinner) findViewById(R.id.spinner_interval);
-        mStartDate=(TextView) findViewById(R.id.date_picker);
+        mStartDate=(TextView) findViewById(R.id.start_time_picker);
         mEndDate=(TextView) findViewById(R.id.end_date);
 
-        mTime=(TextView) findViewById(R.id.time_picker);
+
         mCurrentDate=Calendar.getInstance();
         linearLayout=(LinearLayout)findViewById(R.id.dosage_time_);
 
-        day=mCurrentDate.get(Calendar.DAY_OF_MONTH);
+          convertDateFrom = new SimpleDateFormat("yyyy-MM-dd");
+
+          convertDateTo = new SimpleDateFormat("dd/MM/yyyy");
+
+        currentDay =mCurrentDate.get(Calendar.DAY_OF_MONTH);
         month=mCurrentDate.get(Calendar.MONTH);
         year=mCurrentDate.get(Calendar.YEAR);
 
+        mNumberOfDaysFromStartDay = (EditText) findViewById(R.id.number_of_days);
 
-//        month= month + 1;
-        completeStartDate = day+"/"+ month+"/"+ year;
-                mStartDate.setText(completeStartDate);
+        Date todaysDate = mCurrentDate.getTime();
+//        ?????????? if text is not set then
+        dateToShow = convertDateTo.format(todaysDate);
+                mStartDate.setText(dateToShow);
+
 
         hour = mCurrentDate.get(Calendar.HOUR_OF_DAY);
         String sHour= Integer.toString(hour);
         min = mCurrentDate.get(Calendar.MINUTE);
         String sMin= Integer.toString(min);
-//        mDosageAndTime=new DosageAndTime();
-////        mDosageAndTime.setDosage("1");
-////        mDosageAndTime.setTime("8","45");
-//        listDosageAndTime = new ArrayList<>();
-////        mMainlist.setHasFixedSize(true);
-////        listDosageAndTime.add(mDosageAndTime);
-//        LinearLayoutManager  wo=new LinearLayoutManager(this);
-//        mMainlist.setLayoutManager(wo);
-//        DosageAndTimeAdapter =new DosageAndTimeAdapter(listDosageAndTime);
 
-
-//        mMainlist.setAdapter(DosageAndTimeAdapter);
 
         mStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,14 +205,28 @@ public class EditorActivity extends AppCompatActivity implements
                 DatePickerDialog mDatePickerDialog=new DatePickerDialog(EditorActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int yearChoosen, int monthOftheYear, int dayOfTheMonth) {
-                        monthOftheYear =monthOftheYear +1;
+                        monthOftheYear =monthOftheYear + 1;
+
+
                         month=monthOftheYear;
-                        day=dayOfTheMonth;
+                        currentDay =dayOfTheMonth;
                         year=yearChoosen;
-                        completeStartDate= dayOfTheMonth + "/" + monthOftheYear+ "/" + yearChoosen;
-                        mStartDate.setText(completeStartDate);
+                        String _Date = yearChoosen + "-" + monthOftheYear+ "-" + dayOfTheMonth;
+//                         "2010-MM-29 08:45:22"
+
+                        try {
+                            Date date = convertDateFrom.parse(_Date);
+                            dateToShow = convertDateTo.format(date);
+                            mCurrentDate.setTime(date);
+//                            dbStartDate =mCurrentDate.getTimeInMillis();
+                            mStartDate.setText(dateToShow);
+                        }
+                        catch(ParseException pe) {
+
+                            mStartDate.setText("Date?");
+                        }
                     }
-                },year,month,day);
+                },year,month, currentDay);
 
 
                 mDatePickerDialog.show();
@@ -212,25 +234,7 @@ public class EditorActivity extends AppCompatActivity implements
             }
         });
 
-//        mEndDate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DatePickerDialog mDatePickerDialog=new DatePickerDialog(EditorActivity.this, new DatePickerDialog.OnDateSetListener() {
-//                    @Override
-//                    public void onDateSet(DatePicker datePicker, int eYear, int eMonthOftheYear, int eDayOfTheMonth) {
-////
-//
-//                        mEndDate.setText(eDayOfTheMonth + "/" + eMonthOftheYear + "/" +  eMonthOftheYear);
-//                    }
-//                },year,month,day);
-//
-//
-//                mDatePickerDialog.show();
-//
-//            }
-//        });
-
-
+        mNumberOfDaysFromStartDay.addTextChangedListener(numberOfDaysWatcher);
         //Time picker
        mTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -243,7 +247,6 @@ public class EditorActivity extends AppCompatActivity implements
                                 try {
                                     String dtStart = String.valueOf(hourOfDay) + ":" + String.valueOf(minute);
                                     format = new SimpleDateFormat("HH:mm");
-
                                     timeValue = new java.sql.Time(format.parse(dtStart).getTime());
                                     mTime.setText(String.valueOf(timeValue));
                                     String amPm = hourOfDay % 12 + ":" + minute + " " + ((hourOfDay >= 12) ? "PM" : "AM");
@@ -275,21 +278,109 @@ public class EditorActivity extends AppCompatActivity implements
     }
 
 
-    private void deleteViews() {
+
+    private final TextWatcher numberOfDaysWatcher = new TextWatcher() {
+
+          boolean ignore = true;
+
+          @Override
+          public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+          }
+
+          @Override
+          public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+          }
+
+          @Override
+          public void afterTextChanged(Editable editable) {
+              try {
+
+                  String sNumberOfDays;
+                  if (mNumberOfDaysFromStartDay.getText().hashCode() == editable.hashCode()) {
+
+                      if (editable.length() > 0) {
+
+                          if (ignore) {
+
+                              numberOfMedDays = Integer.parseInt(mNumberOfDaysFromStartDay.getText().toString().trim());
+//                              medicationDaysfromNow = currentDay + numberOfMedDays;
+
+                              calEndDate = Calendar.getInstance();
+
+                              calEndDate.set(year,month,currentDay);
+
+                              calEndDate.add(Calendar.DATE,numberOfMedDays);
+
+
+                              int endDay = calEndDate.get(Calendar.DAY_OF_MONTH);
+
+                              int endMonth= calEndDate.get(Calendar.MONTH) + 1 ; // +1  (because months begin with 0)
+
+                              int endYear= calEndDate.get(Calendar.YEAR);
+
+                              String _EndDate = endYear + "-" + endMonth+ "-" + endDay;
+
+//                             dbEndDate = calEndDate.getTimeInMillis();
+
+
+                              try {
+                                  Date date = convertDateFrom.parse(_EndDate);
+                                  dateToShow = convertDateTo.format(date);
+//                                  mCurrentDate.setTime(date);
+//                                  dbStartDate =mCurrentDate.getTimeInMillis();
+                                  mEndDate.setText(dateToShow);
+                              }
+                              catch(ParseException pe) {
+
+                                  mEndDate.setText("Date?");
+                              }
+
+
+                              mEndDate.setText(dateToShow);
+                              mEndDate.setVisibility(View.VISIBLE);
+                              return;
+                          }
+                          else{ mEndDate.setVisibility(View.GONE);}
+
+                          ignore = false;
+
+                      }
+
+
+                  }
+
+
+              } catch (NumberFormatException e) {
+                  mNumberOfDaysFromStartDay.setText("");
+                  mEndDate.setVisibility(View.GONE);
+                  Toast.makeText(getBaseContext(), "You can only Enter Numbers!", Toast.LENGTH_LONG).show();
+              }
+
+          }
+      };
+
+
+
+    private void clearViews() {
 ////        now to remove the whole layout
         linearLayout.removeAllViews();
+        dosage="";
+        time="";
+        toSave.clear();
     }
 
         private void setupTextViews(int numberofTextViews) {
-
+        infaltedParentView.clear();
         for (int i = 0; i < numberofTextViews; i++) {
             LayoutInflater inflater = LayoutInflater.from(this);
             View inflatedLayout= inflater.inflate(R.layout.dosage_time_list, null, false);
-//           String number_of_children= Integer.toString(linearLayout.getChildCount());
-//           LinearLayout child = (LinearLayout) inflatedLayout.findViewById(R.id.dosage_time);
-//           View yeel = child.getChildAt(0);
-//           TextView ok=(TextView) yeel.findViewById(R.id.number_of_drugs);
-//            ok.setText("gosilla");
+           String number_of_children= Integer.toString(linearLayout.getChildCount());
+//           LinearLayout child = (LinearLayout) linearLayout.findViewById(R.id.dosage_time_);
+
+           TextView ok=(TextView)inflatedLayout.findViewById(R.id.number_of_drugs);
+            ok.setText("gosilla");
 
            final TextView timeOfTheDay =(TextView)inflatedLayout.findViewById(R.id.time_of_the_day);
 //           TextView dosage =(TextView)inflatedLayout.findViewById(R.id.number_of_drugs);
@@ -325,18 +416,42 @@ public class EditorActivity extends AppCompatActivity implements
                 }
             });
 
-
-//            String output = getNumbers(gp);
-//            dosage.setText(output);
+//            String date_time = getNumbers(gp);
+//            dosage.setText(date_time);
 //          String done= timeOfTheDay.getText().toString();
 
+
             linearLayout.addView(inflatedLayout);
-            ArrayList<LinearLayout> infaltedParentView=new ArrayList<>();
+            infaltedParentView.add(inflatedLayout);
 
 
         }
     }
 
+    private ArrayList<String> iteratethroughViews(ArrayList<View> DosageAndTimeViews){
+        String dosageToBeTaken="";
+        String sTimeOfTheDay="";
+        String getSize= Integer.toString(DosageAndTimeViews.size()) ;
+
+        for(View eachDosageAndTimeView : DosageAndTimeViews){
+            TextView timeOfTheDay =(TextView) eachDosageAndTimeView.findViewById(R.id.time_of_the_day);
+            TextView dosage =(TextView) eachDosageAndTimeView.findViewById(R.id.number_of_drugs);
+         dosageToBeTaken= dosage.getText().toString();
+         sTimeOfTheDay= timeOfTheDay.getText().toString();
+            String sDate_time = dosageToBeTaken+ "-"+sTimeOfTheDay +"-"+getSize;
+            date_time.add(sDate_time);
+        }
+
+        return date_time;
+    }
+    private void saveDosageAndTime(ArrayList<String> allDosageAndTime){
+        String goal="";
+        for(String eachDosageAndTime : allDosageAndTime){
+            getNumbers(eachDosageAndTime);
+            Toast.makeText(getBaseContext(), dosage + " " + time,Toast.LENGTH_SHORT).show();
+        }
+//        return goal;
+    }
 //        TextView textView1 = new TextView(this);
 //        textView1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
 //                LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -349,11 +464,15 @@ public class EditorActivity extends AppCompatActivity implements
 //kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk;
 
 
-//    private String getNumbers(String data){
-//        String [] yo= data.split(":");
-//      String go= yo[1] +", " +yo[2]  +", " +yo[3];
-//      return go;
-//    }
+    private void getNumbers(String data){
+        String  parts[] = data.split("-");
+          dosage += parts[0] + ", " ;
+          time   += parts[1] + ", ";
+//        for(int i=0;i<parts.length;i++) {
+//      }
+//        return dosage + time;
+    }
+    String now;
 
     /**
      * Setup the dropdown spinner that allows the user to select the gender of the pet.
@@ -381,96 +500,107 @@ public class EditorActivity extends AppCompatActivity implements
                         // Respond to a click on the "Save" menu option
                         case 1:
                             // Save pet to database
-                            deleteViews();
+                            clearViews();
                             mInterval = MedManagerContract.MedManagerEntry.ONCE_A_DAY;
                             setupTextViews(1);
-                            mEndDate.setText(selection);
+                            toSave= iteratethroughViews(infaltedParentView);
+                            saveDosageAndTime(toSave);
 
                             break;
                         case 2:
-                            deleteViews();
+                            clearViews();
                             // Save pet to database
                             mInterval = MedManagerContract.MedManagerEntry.TWICE_A_DAY;
                             setupTextViews(2);
-                            mEndDate.setText(selection);
+                            toSave= iteratethroughViews(infaltedParentView);
+                            saveDosageAndTime(toSave);
+
                             break;
                         case 3:
                             // Save pet to database
-                            deleteViews();
+                            clearViews();
+
                             mInterval = MedManagerContract.MedManagerEntry.TRICE_A_DAY;
                             setupTextViews(3);
-                            mEndDate.setText(selection);
-
+                            toSave= iteratethroughViews(infaltedParentView);
+                            saveDosageAndTime(toSave);
                             break;
                         case 4:
                             // Save pet to database
-                            deleteViews();
+                            clearViews();
                             mInterval = MedManagerContract.MedManagerEntry.FOUR_TIMES_A_DAY;
                             setupTextViews(4);
-                            mEndDate.setText(selection);
+                            toSave= iteratethroughViews(infaltedParentView);
+                            saveDosageAndTime(toSave);
                             break;
                         case 5:
                             // Save pet to database
-                            deleteViews();
+                            clearViews();
                             mInterval = MedManagerContract.MedManagerEntry.FIVE_TIMES_A_DAY;
                             setupTextViews(5);
-                            mEndDate.setText(selection);
+                            toSave= iteratethroughViews(infaltedParentView);
+                            saveDosageAndTime(toSave);
                             break;
                         case 6:
                             // Save pet to database
-                            deleteViews();
+                            clearViews();
                             mInterval = MedManagerContract.MedManagerEntry.SIX_TIMES_A_DAY;
-                            mEndDate.setText(selection);
+                            setupTextViews(6);
+                            toSave= iteratethroughViews(infaltedParentView);
+                            saveDosageAndTime(toSave);
                             break;
                         case 7:
                             // Save pet to database
-                            deleteViews();
+                            clearViews();
                             mInterval = MedManagerContract.MedManagerEntry.SEVEN_TIMES_A_DAY;
-                            mEndDate.setText(selection);
+                            setupTextViews(position);
+                            toSave= iteratethroughViews(infaltedParentView);
+                            saveDosageAndTime(toSave);
                             break;
                         case 8:
                             // Save pet to database
-                            deleteViews();
+                            clearViews();
                             mInterval = MedManagerContract.MedManagerEntry.EIGHT_TIMES__A_DAY;
-                            mEndDate.setText(selection);
+                            setupTextViews(8);
+                            toSave= iteratethroughViews(infaltedParentView);
+                            saveDosageAndTime(toSave);
                             break;
                         case 9:
                             // Save pet to database
-                            deleteViews();
+                            clearViews();
                             mInterval = MedManagerContract.MedManagerEntry.NINE_TIMES_A_DAY;
-                            mEndDate.setText(selection);
+                            setupTextViews(9);
+                            toSave= iteratethroughViews(infaltedParentView);
+                            saveDosageAndTime(toSave);
                             break;
                             case 10:
                             // Save pet to database
-                                deleteViews();
+                                clearViews();
                             mInterval = MedManagerContract.MedManagerEntry.TEN_TIMES_A_DAY;
-                            mEndDate.setText(selection);
+                                setupTextViews(10);
+                                toSave= iteratethroughViews(infaltedParentView);
+                                saveDosageAndTime(toSave);
                             break;
                         case 11:
                             // Save pet to database
-                            deleteViews();
+                            clearViews();
                             mInterval = MedManagerContract.MedManagerEntry.ELEVEN_TIMES_A_DAY;
-                            mEndDate.setText(selection);
+                            setupTextViews(5);
+                            toSave= iteratethroughViews(infaltedParentView);
+                            saveDosageAndTime(toSave);
                             break;
                         case 12:
                             // Save pet to
-                            deleteViews();
+                            clearViews();
                             mInterval = MedManagerContract.MedManagerEntry.TWELVE_TIMES_A_DAY;
-                            mEndDate.setText(selection);
+                            setupTextViews(5);
+                            toSave= iteratethroughViews(infaltedParentView);
+                            saveDosageAndTime(toSave);
                             break;
                         default:
-                            deleteViews();
+                            clearViews();
                             mInterval = MedManagerContract.MedManagerEntry.FREQUENCY;
-                            mEndDate.setText(selection);
                             break;
-
-//                    if (selection.equals(getString(R.string.twice_a_day))) {
-//                        mFrequency_Interval = MedManagerContract.MedManagerEntry.TWICE_A_DAY;
-//                    } else if (selection.equals(getString(R.string.trice_a_day))) {
-//                        mFrequency_Interval = MedManagerContract.MedManagerEntry.TRICE_A_DAY;
-//                    } else {
-//                        mFrequency_Interval = MedManagerContract.MedManagerEntry.ONCE_A_DAY;
-//                    }
 
                     }
                 }
@@ -491,15 +621,34 @@ public class EditorActivity extends AppCompatActivity implements
         // Use trim to eliminate leading or trailing white space
         String name = mNameEditText.getText().toString().trim();
         String description = mDescriptionEditText.getText().toString().trim();
-        String startDate = mStartDate.getText().toString();
-        String endDate = mEndDate.getText().toString().trim();
+        String startDate = mStartDate.getText().toString().trim();
+//        started
+        try {
+            SimpleDateFormat convertDateFrom = new SimpleDateFormat("dd/MM/yyyy");
+           Date date= convertDateFrom.parse(startDate);
+           mCurrentDate.setTime(date);
+          dbStartDate =String.valueOf(mCurrentDate.getTimeInMillis());
 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+//        stopes
+//        String endDate = mEndDate.getText().toString().trim();
 
+//        try {
+//            SimpleDateFormat convertDateFrom = new SimpleDateFormat("dd/MM/yyyy");
+//            Date date= convertDateFrom.parse(endDate);
+//            calEndDate.setTime(date);
+//            dbEndDate = String.valueOf(calEndDate.getTimeInMillis());
+//
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
         // Check if this is supposed to be a new pet
         // and check if all the fields in the editor are blank
         if (mCurrentMedManagerUri == null &&
                 TextUtils.isEmpty(name) && TextUtils.isEmpty(description) &&
-                TextUtils.isEmpty(startDate) && TextUtils.isEmpty(endDate)&&
+                TextUtils.isEmpty(dbStartDate) && TextUtils.isEmpty(dbEndDate)&&
                 mInterval == MedManagerContract.MedManagerEntry.FREQUENCY) {
             // Since no fields were modified, we can return early without creating a new pet.
             // No need to create ContentValues and no need to do any ContentProvider operations.
@@ -512,16 +661,16 @@ public class EditorActivity extends AppCompatActivity implements
         values.put(MedManagerContract.MedManagerEntry.COLUMN_MEDICATION_NAME, name);
         values.put(MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION, description);
         values.put(MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL, mInterval);
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_DATE, completeStartDate);
-//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_DATE, endDate);
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_DAY, day);
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_MONTH, month);
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_YEAR, year);
-//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_DAY, endDate);
-//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_MONTH, completeStartDate);
-//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_YEAR, endDate);
-//        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_DAY, completeStartDate);
-//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_DATE, endDate);
+        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_DATE, dbStartDate);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_DATE, dbEndDate);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS,numberOfMedDays);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_MONTH, month);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_YEAR, year);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_DAY, calEndDate);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_MONTH, dateToShow);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_YEAR, calEndDate);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS, dateToShow);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_DATE, calEndDate);
 //        // If the weight is not provided by the user, don't try to parse the string into an
 //        // integer value. Use 0 by default.
 //        int weight = 0;
@@ -538,13 +687,14 @@ public class EditorActivity extends AppCompatActivity implements
 
             // Show a toast message depending on whether or not the insertion was successful.
             if (newUri == null) {
-
+                Toast.makeText(this, name+" ---- "+  description+ " ---- "+ mInterval+ " ---- "+ dbStartDate+ " ---- "+
+                        dbEndDate+ " ---- "+   numberOfMedDays+ " ---- "+   month+ " ---- "+year,Toast.LENGTH_SHORT).show();
                 // If the new content URI is null, then there was an error with insertion.
                 Toast.makeText(this, getString(R.string.editor_insert_pet_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the insertion was successful and we can display a toast.
-                Toast.makeText(this, name + description+ mInterval+completeStartDate,Toast.LENGTH_SHORT).show();
+
                 Toast.makeText(this, getString(R.string.editor_insert_pet_successful),
                         Toast.LENGTH_SHORT).show();
             }
@@ -669,12 +819,13 @@ public class EditorActivity extends AppCompatActivity implements
                 MedManagerContract.MedManagerEntry._ID,
                 MedManagerContract.MedManagerEntry.COLUMN_MEDICATION_NAME,
                 MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION,
-                MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL,
-                MedManagerContract.MedManagerEntry.COLUMN_START_DAY,
-                MedManagerContract.MedManagerEntry.COLUMN_START_MONTH,
-                MedManagerContract.MedManagerEntry.COLUMN_START_YEAR,
+
+//                MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS,
+//                MedManagerContract.MedManagerEntry.COLUMN_START_MONTH,
+//                MedManagerContract.MedManagerEntry.COLUMN_START_YEAR,
 //                MedManagerContract.MedManagerEntry.COLUMN_END_DATE,
-                MedManagerContract.MedManagerEntry.COLUMN_START_DATE };
+                MedManagerContract.MedManagerEntry.COLUMN_START_DATE,
+                MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL,};
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
@@ -700,9 +851,10 @@ public class EditorActivity extends AppCompatActivity implements
             int DescriptionColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION);
             int FrequencyColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL);
             int startDateColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_DATE);
-            int startDayColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_DAY);
-            int startMonthColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_MONTH);
-            int startYearColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_YEAR);
+//            int endDateColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_END_DATE);
+//            int startDayColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS);
+//            int startMonthColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_MONTH);
+//            int startYearColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_YEAR);
 
 //            int endDateColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_END_DATE);
 
@@ -711,17 +863,31 @@ public class EditorActivity extends AppCompatActivity implements
             String Description = cursor.getString(DescriptionColumnIndex);
             int frequency = cursor.getInt(FrequencyColumnIndex);
             String startDate = cursor.getString(startDateColumnIndex);
-            String startDay = cursor.getString(startDayColumnIndex);
-            int startMonth = cursor.getInt(startMonthColumnIndex);
-            String startYear = cursor.getString(startYearColumnIndex);
-//            String  endDate = cursor.getString(endDateColumnIndex);
+//            String  sEndDate = cursor.getString(endDateColumnIndex);
+//            String startDay = cursor.getString(startDayColumnIndex);
+//            String startMonth = cursor.getString(startMonthColumnIndex);
+//            String startYear = cursor.getString(startYearColumnIndex);
+
 
             // Update the views on the screen with the values from the database
             mNameEditText.setText(Medname);
             mDescriptionEditText.setText(Description);
-            mStartDate.setText(startDate);
 
-            mEndDate.setText(startDay+startMonth+startYear);
+            mCurrentDate.setTimeInMillis(Long.parseLong(startDate));
+            Date dStartDate= mCurrentDate.getTime();
+            dateToShow =  convertDateTo.format(dStartDate);
+            Toast.makeText(this, dateToShow,
+                    Toast.LENGTH_SHORT).show();
+
+
+            mStartDate.setText(dateToShow);
+
+
+//            calEndDate.setTimeInMillis(Long.parseLong(sEndDate));
+//            Date dEndDate= calEndDate.getTime();
+//            String showEndDate =  convertDateTo.format(dEndDate);
+//
+//            mEndDate.setText(showEndDate);
 
             // Gender is a dropdown spinner, so map the constant value from the database
             // into one of the dropdown options (0 is Unknown, 1 is Male, 2 is Female).

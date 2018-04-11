@@ -55,11 +55,13 @@ public class MedDbHelper extends SQLiteOpenHelper {
                 + MedManagerEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + MedManagerEntry.COLUMN_MEDICATION_NAME + " TEXT NOT NULL, "
                 + MedManagerEntry.COLUMN_MED_DESCRIPTION + " TEXT, "
-                + MedManagerEntry.COLUMN_START_DAY + " TEXT, "
-                + MedManagerEntry.COLUMN_START_MONTH + " TEXT, "
-                + MedManagerEntry.COLUMN_START_YEAR + " TEXT, "
-                + MedManagerEntry.COLUMN_FREQUENCY_INTERVAL + " INTEGER NOT NULL, "
-                + MedManagerEntry.COLUMN_START_DATE + " TEXT NOT NULL);";
+                + MedManagerEntry.COLUMN_START_DATE + " TEXT NOT NULL, "
+//                + MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS + " TEXT, "
+//                + MedManagerEntry.COLUMN_START_MONTH + " TEXT, "
+//                + MedManagerEntry.COLUMN_START_YEAR + " TEXT, "
+//                + MedManagerEntry.COLUMN_END_DATE + " TEXT, "
+
+                + MedManagerEntry.COLUMN_FREQUENCY_INTERVAL + " INTEGER NOT NULL);";
 
         // Execute the SQL statement
         db.execSQL(SQL_CREATE_PETS_TABLE);
@@ -70,6 +72,6 @@ public class MedDbHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // The database is still at version 1, so there's nothing to do be done here.
+
     }
 }

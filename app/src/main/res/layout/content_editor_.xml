@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -18,7 +19,7 @@
 
             <!-- Label -->
             <TextView
-                android:text="@string/category_overview"
+                android:text="Medication Details"
                 style="@style/CategoryStyle" />
 
             <!-- Input fields -->
@@ -83,61 +84,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp">
-            <TextView
-                android:id="@+id/schedule"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/date_picker"
-                android:layout_alignEnd="@+id/date_picker"
-                android:layout_alignRight="@+id/date_picker"
-                android:gravity="center_horizontal"
-                android:textColor="@color/colorAccent"
-                android:textSize="18dp"
-                android:layout_marginBottom="20dp"
-                android:text="Medication Schedule" />
-            <!-- Gender category -->
-
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="30dp"
-                android:padding="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
                 >
+            <TextView
+                android:id="@+id/reminder_times"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorAccent"
+                android:textSize="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="Reminder Times" />
+            <!-- Gender category -->
 
-                <TextView
-                    android:id="@+id/start_picker_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginBottom="20dp"
-                    android:text="Start date:"/>
-
-                <TextView
-                    android:id="@+id/date_picker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:text="28/05/18" />
 
                 <LinearLayout android:id="@+id/dosage_time_"
                          android:layout_width="match_parent"
                          android:layout_height="wrap_content"
-                         android:layout_below="@+id/start_picker_text"
+                         android:layout_below="@+id/select_frequency"
                          android:orientation="vertical"
                           />
                 <!--layout="@layout/dosage_time_list"-->
                     <!-- Label -->
                     <TextView
-                        android:id="@+id/select_interval"
+                        android:id="@+id/select_frequency"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginBottom="20dp"
-                        android:text="@string/category_frequency_interval"
-                        android:layout_below="@+id/dosage_time_"/>
+                        android:text="@string/frequency"
+                        android:layout_below="@+id/reminder_times"/>
 
                     <!-- Input field -->
 
@@ -147,32 +129,17 @@
                     android:id="@+id/spinner_interval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:prompt="@string/frequency"
-                    android:layout_alignBottom="@+id/select_interval"
-                    android:layout_alignLeft="@+id/select_interval"
-                    android:layout_alignStart="@+id/date_picker"
-                    android:layout_alignTop="@+id/select_interval"
+                    android:layout_below="@+id/reminder_times"
+                    android:layout_marginLeft="56dp"
+                    android:layout_marginStart="56dp"
+                    android:layout_toEndOf="@+id/select_frequency"
+                    android:layout_toRightOf="@+id/select_frequency"
                     android:paddingRight="16dp"
+                    android:prompt="@string/frequency"
                     android:spinnerMode="dropdown" />
 
-
-                <TextView
-                    android:id="@+id/end_date_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/select_interval"
-                    android:text="End date:" />
-
-                <TextView
-                    android:id="@+id/end_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/spinner_interval"
-                    android:layout_below="@+id/select_interval"
-                    android:layout_centerVertical="true"
-                    android:text="28/05/18" />
             </RelativeLayout>
-
+</android.support.v7.widget.CardView>
             <!--<LinearLayout-->
                 <!--android:id="@+id/container_gender"-->
                 <!--android:layout_width="match_parent"-->
@@ -201,26 +168,127 @@
                 <!--</LinearLayout>-->
             <!--</LinearLayout>-->
 
-        </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
+
+
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="30dp">
+    <TextView
+        android:id="@+id/schedule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/date_picker"
+        android:layout_alignEnd="@+id/date_picker"
+        android:layout_alignRight="@+id/date_picker"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorAccent"
+        android:textSize="18dp"
+        android:layout_marginBottom="20dp"
+        android:text="Medication Schedule" />
+    <!-- Gender category -->
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:padding="10dp"
+        >
+
+        <!--<view-->
+            <!--android:layout_width="45dp"-->
+            <!--android:layout_height="1dp"-->
+            <!--padding android:layout_marginBottom="20dp"-->
+            <!--android:layout_below="@+id/start_picker_text"/>-->
+
+        <LinearLayout android:id="@+id/schedue_duration"
             android:layout_width="match_parent"
-            android:layout_marginTop="30dp"
-            android:padding="30dp"
-            android:layout_height="wrap_content">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                >
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            />
+        <!--layout="@layout/dosage_time_list"-->
+        <!-- Label -->
 
-                <TextView
-                    android:id="@+id/time_picker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:text="28/05/18" />
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Duration"
+            />
+        <TextView
+            android:id="@+id/start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/duration"
+            android:layout_marginBottom="26dp"
+            android:text="Start date:" />
+
+        <TextView
+            android:id="@+id/start_time_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/duration"
+            android:layout_marginBottom="26dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/start_time"
+            android:layout_toRightOf="@+id/start_time"
+            android:layout_marginLeft="60dp"
+            android:text="28/05/18" />
+
+        <EditText
+            android:id="@+id/number_of_days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/days"
+            android:layout_marginLeft="52dp"
+            android:layout_marginStart="52dp"
+            android:layout_toEndOf="@+id/start_time"
+            android:layout_toRightOf="@+id/start_time" />
+
+        <!-- Input field -->
+
+
+        <!-- Gender drop-down spinner -->
+        <TextView
+            android:id="@+id/days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/start_time"
+            android:paddingRight="16dp"
+            android:text="Number of Days : " />
+
+
+        <TextView
+            android:id="@+id/end_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/number_of_days"
+            android:layout_marginTop="26dp"
+            android:text="End date:" />
+
+        <TextView
+            android:id="@+id/end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/end_date_text"
+            android:layout_alignBottom="@+id/end_date_text"
+            android:layout_alignLeft="@+id/start_time_picker"
+            android:layout_alignStart="@+id/start_time_picker"
+            android:visibility="gone"
+            android:text="28/05/18" />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>
+
+
     </LinearLayout>
+</ScrollView>

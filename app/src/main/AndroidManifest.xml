@@ -43,7 +43,12 @@
         <activity
             android:name=".MonthActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".MonthsActivity"></activity>
+        <activity android:name=".MonthsActivity" />
+        <activity android:name=".Month2Activity" />
+        <activity
+            android:name=".Timeinterval"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".EachDayActivity"></activity>
     </application>
 
 </manifest>

@@ -10,10 +10,10 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 /**
- * Created by Olije favour on 3/29/2018.
+ * Created by Olije favour on 4/11/2018.
  */
 
-public class MonthsAdapter extends CursorAdapter {
+public class EachDayAdapter extends CursorAdapter {
 
     /**
      * Constructs a new {@link MedCursorAdapter}.
@@ -21,7 +21,8 @@ public class MonthsAdapter extends CursorAdapter {
      * @param context The context
      * @param c       The cursor from which to get the data.
      */
-    public MonthsAdapter(Context context, Cursor c) {
+    public EachDayAdapter(Context context, Cursor c) {
+
         super(context, c, 0 /* flags */);
     }
 
@@ -52,27 +53,35 @@ public class MonthsAdapter extends CursorAdapter {
      */
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        // Find individual views that we want to modify in the list item layout
-        TextView timeTextView = (TextView) view.findViewById(R.id.time_of_the_day);
-        TextView nameOfDrugTextView = (TextView) view.findViewById(R.id.name_of_drug);
 
+        TextView timeoftheday;
+        TextView nameofdrug;
+
+            timeoftheday = (TextView) view.findViewById(R.id.time_of_the_day);
+            nameofdrug = (TextView) view.findViewById(R.id.name_of_drug);
         // Find the columns of pet attributes that we're interested in
         int medNameColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MEDICATION_NAME);
-        int descriptionColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION);
+        int MedTimeColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION);
 
         // Read the pet attributes from the Cursor for the current pet
-        String medNameName = cursor.getString(medNameColumnIndex);
-        String medDescription = cursor.getString(descriptionColumnIndex);
+        String medName= cursor.getString(medNameColumnIndex);
+        String medTime = cursor.getString(MedTimeColumnIndex);
 
         // If the pet breed is
         // empty string or null, then use some default text
         // that says "Unknown breed", so the TextView isn't blank.
-        if (TextUtils.isEmpty(medDescription)) {
-            medDescription = context.getString(R.string.medication_name);
+        if (TextUtils.isEmpty(medTime)) {
+            medTime = context.getString(R.string.medication_name);
         }
 
+
         // Update the TextViews with the attributes for the current pet
-        timeTextView.setText(medNameName);
-        nameOfDrugTextView.setText(medDescription);
+        timeoftheday.setText(medTime);
+         nameofdrug.setText(medName);
+
+
+
+
+
     }
 }
