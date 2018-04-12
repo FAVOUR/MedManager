@@ -58,7 +58,7 @@ public class MedDbHelper extends SQLiteOpenHelper {
                 + MedManagerEntry.COLUMN_START_DATE + " TEXT NOT NULL, "
                 + MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS + " INTEGER NOT NULL, "
 //                + MedManagerEntry.COLUMN_START_MONTH + " TEXT, "
-//                + MedManagerEntry.COLUMN_START_YEAR + " TEXT, "
+////                + MedManagerEntry.COLUMN_START_YEAR + " TEXT, "
                 + MedManagerEntry.COLUMN_MED_END_DATE + " TEXT NOT NULL, "
 
                 + MedManagerEntry.COLUMN_FREQUENCY_INTERVAL + " INTEGER NOT NULL);";

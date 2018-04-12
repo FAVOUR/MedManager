@@ -83,13 +83,13 @@ public class EditorActivity extends AppCompatActivity implements
     private TextView mEndDate;
 
     /** EditText field to enter the number of days from start date */
-    private EditText mNumberOfDaysFromStartDay;
+    private EditText daysFromStartDay;
 
     String dateToShow;
 
-    Calendar mCurrentDate;
+    Calendar calStartDate;
 
-    private int currentDay,month,year;
+    private int startDay, startMonth, startYear;
     private int numberofTextViews;
 
     java.sql.Time timeValue;
@@ -173,28 +173,29 @@ public class EditorActivity extends AppCompatActivity implements
         mEndDate=(TextView) findViewById(R.id.end_date);
 
 
-        mCurrentDate=Calendar.getInstance();
+        calStartDate =Calendar.getInstance();
+        calEndDate = Calendar.getInstance();
         linearLayout=(LinearLayout)findViewById(R.id.dosage_time_);
 
           convertDateFrom = new SimpleDateFormat("yyyy-MM-dd");
 
           convertDateTo = new SimpleDateFormat("dd/MM/yyyy");
 
-        currentDay =mCurrentDate.get(Calendar.DAY_OF_MONTH);
-        month=mCurrentDate.get(Calendar.MONTH);
-        year=mCurrentDate.get(Calendar.YEAR);
+        startDay = calStartDate.get(Calendar.DAY_OF_MONTH);
+        startMonth = calStartDate.get(Calendar.MONTH);
+        startYear = calStartDate.get(Calendar.YEAR);
 
-        mNumberOfDaysFromStartDay = (EditText) findViewById(R.id.number_of_days);
+        daysFromStartDay = (EditText) findViewById(R.id.number_of_days);
 
-        Date todaysDate = mCurrentDate.getTime();
+        Date todaysDate = calStartDate.getTime();
 
         dateToShow = convertDateTo.format(todaysDate);
                 mStartDate.setText(dateToShow);
 
 
-        hour = mCurrentDate.get(Calendar.HOUR_OF_DAY);
+        hour = calStartDate.get(Calendar.HOUR_OF_DAY);
         String sHour= Integer.toString(hour);
-        min = mCurrentDate.get(Calendar.MINUTE);
+        min = calStartDate.get(Calendar.MINUTE);
         String sMin= Integer.toString(min);
 
 
@@ -207,17 +208,18 @@ public class EditorActivity extends AppCompatActivity implements
                         monthOftheYear =monthOftheYear + 1;
 
 
-                        month=monthOftheYear;
-                        currentDay =dayOfTheMonth;
-                        year=yearChoosen;
+                        startMonth =monthOftheYear;
+                        startDay =dayOfTheMonth;
+                        startYear =yearChoosen;
                         String _Date = yearChoosen + "-" + monthOftheYear+ "-" + dayOfTheMonth;
 //                         "2010-MM-29 08:45:22"
+
 
                         try {
                             Date date = convertDateFrom.parse(_Date);
                             dateToShow = convertDateTo.format(date);
-                            mCurrentDate.setTime(date);
-//                            dbStartDate =mCurrentDate.getTimeInMillis();
+                            calStartDate.setTime(date);
+//                            dbStartDate =calStartDate.getTimeInMillis();
                             mStartDate.setText(dateToShow);
                         }
                         catch(ParseException pe) {
@@ -225,7 +227,7 @@ public class EditorActivity extends AppCompatActivity implements
                             mStartDate.setText("Date?");
                         }
                     }
-                },year,month, currentDay);
+                }, startYear, startMonth, startDay);
 
 
                 mDatePickerDialog.show();
@@ -233,7 +235,7 @@ public class EditorActivity extends AppCompatActivity implements
             }
         });
 
-        mNumberOfDaysFromStartDay.addTextChangedListener(numberOfDaysWatcher);
+        daysFromStartDay.addTextChangedListener(numberOfDaysWatcher);
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
@@ -254,12 +256,13 @@ public class EditorActivity extends AppCompatActivity implements
 
           @Override
           public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+              mEndDate.setVisibility(View.GONE);
+              ignore = true;
           }
 
           @Override
           public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+              mEndDate.setVisibility(View.GONE);
           }
 
           @Override
@@ -267,18 +270,18 @@ public class EditorActivity extends AppCompatActivity implements
               try {
 
                   String sNumberOfDays;
-                  if (mNumberOfDaysFromStartDay.getText().hashCode() == editable.hashCode()) {
+                  if (daysFromStartDay.getText().hashCode() == editable.hashCode()) {
 
                       if (editable.length() > 0) {
 
                           if (ignore) {
 
-                              numberOfMedDays = Integer.parseInt(mNumberOfDaysFromStartDay.getText().toString().trim());
-//                              medicationDaysfromNow = currentDay + numberOfMedDays;
+                              numberOfMedDays = Integer.parseInt(daysFromStartDay.getText().toString().trim());
+//                              medicationDaysfromNow = startDay + numberOfMedDays;
 
-                              calEndDate = Calendar.getInstance();
 
-                              calEndDate.set(year,month,currentDay);
+
+                              calEndDate.set(startYear, startMonth, startDay);
 
                               calEndDate.add(Calendar.DATE,numberOfMedDays);
 
@@ -297,8 +300,8 @@ public class EditorActivity extends AppCompatActivity implements
                               try {
                                   Date date = convertDateFrom.parse(_EndDate);
                                   dateToShow = convertDateTo.format(date);
-//                                  mCurrentDate.setTime(date);
-//                                  dbStartDate =mCurrentDate.getTimeInMillis();
+//                                  calStartDate.setTime(date);
+//                                  dbStartDate =calStartDate.getTimeInMillis();
                                   mEndDate.setText(dateToShow);
                               }
                               catch(ParseException pe) {
@@ -322,7 +325,7 @@ public class EditorActivity extends AppCompatActivity implements
 
 
               } catch (NumberFormatException e) {
-                  mNumberOfDaysFromStartDay.setText("");
+                  daysFromStartDay.setText("");
                   mEndDate.setVisibility(View.GONE);
                   Toast.makeText(getBaseContext(), "You can only Enter Numbers!", Toast.LENGTH_LONG).show();
               }
@@ -580,16 +583,23 @@ public class EditorActivity extends AppCompatActivity implements
         String name = mNameEditText.getText().toString().trim();
         String description = mDescriptionEditText.getText().toString().trim();
         String startDate = mStartDate.getText().toString().trim();
+//        numberOfMedDays = Integer.parseInt(daysFromStartDay.getText().toString().trim());
 //        started
         try {
             SimpleDateFormat convertDateFrom = new SimpleDateFormat("dd/MM/yyyy");
            Date date= convertDateFrom.parse(startDate);
-           mCurrentDate.setTime(date);
-          dbStartDate =String.valueOf(mCurrentDate.getTimeInMillis());
+           calStartDate.setTime(date);
+          dbStartDate =String.valueOf(calStartDate.getTimeInMillis());
 
-        } catch (ParseException e) {
+        }
+
+        catch (ParseException e) {
             e.printStackTrace();
         }
+
+//        SimpleDateFormat month_date = new SimpleDateFormat("MMMM");
+//        String startMonth= month_date.format(calStartDate.getTime());
+
 
         String endDate = mEndDate.getText().toString().trim();
 
@@ -602,7 +612,7 @@ public class EditorActivity extends AppCompatActivity implements
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        // Check if this is supposed to be a new pet
+//        // Check if this is supposed to be a new pet
         // and check if all the fields in the editor are blank
         if (mCurrentMedManagerUri == null &&
                 TextUtils.isEmpty(name) && TextUtils.isEmpty(description) &&
@@ -619,10 +629,10 @@ public class EditorActivity extends AppCompatActivity implements
         values.put(MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION, description);
         values.put(MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL, mInterval);
         values.put(MedManagerContract.MedManagerEntry.COLUMN_START_DATE, dbStartDate);
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_MED_END_DATE, "ffhyfyfy45454");
-        values.put(MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS,numberOfMedDays);
-//        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_MONTH, month);
-//        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_YEAR, year);
+        values.put(MedManagerContract.MedManagerEntry.COLUMN_MED_END_DATE, dbEndDate);
+        values.put(MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS,7);
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_MONTH, "tolu");
+//        values.put(MedManagerContract.MedManagerEntry.COLUMN_START_YEAR, startYear);
 //        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_DAY, calEndDate);
 //        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_MONTH, dateToShow);
 //        values.put(MedManagerContract.MedManagerEntry.COLUMN_END_YEAR, calEndDate);
@@ -645,7 +655,7 @@ public class EditorActivity extends AppCompatActivity implements
             // Show a toast message depending on whether or not the insertion was successful.
             if (newUri == null) {
                 Toast.makeText(this, name+" ---- "+  description+ " ---- "+ mInterval+ " ---- "+ dbStartDate+ " ---- "+
-                        dbEndDate+ " ---- "+   numberOfMedDays+ " ---- "+   month+ " ---- "+year,Toast.LENGTH_SHORT).show();
+                        dbEndDate+ " ---- "+   numberOfMedDays+ " ---- "+ startMonth + " ---- "+ startYear,Toast.LENGTH_SHORT).show();
                 // If the new content URI is null, then there was an error with insertion.
                 Toast.makeText(this, "Error",
                         Toast.LENGTH_SHORT).show();
@@ -777,10 +787,10 @@ public class EditorActivity extends AppCompatActivity implements
                 MedManagerContract.MedManagerEntry.COLUMN_MEDICATION_NAME,
                 MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION,
 
-//                MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS,
-//                MedManagerContract.MedManagerEntry.COLUMN_START_MONTH,
+                MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS,
+                MedManagerContract.MedManagerEntry.COLUMN_START_MONTH,
 //                MedManagerContract.MedManagerEntry.COLUMN_START_YEAR,
-//                MedManagerContract.MedManagerEntry.COLUMN_MED_END_DATE,
+                MedManagerContract.MedManagerEntry.COLUMN_MED_END_DATE,
                 MedManagerContract.MedManagerEntry.COLUMN_START_DATE,
                 MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL,};
 
@@ -808,9 +818,9 @@ public class EditorActivity extends AppCompatActivity implements
             int DescriptionColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION);
             int FrequencyColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_FREQUENCY_INTERVAL);
             int startDateColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_DATE);
-//            int endDateColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MED_END_DATE);
-//            int startDayColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS);
-//            int startMonthColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_MONTH);
+            int endDateColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MED_END_DATE);
+            int durationColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS);
+            int startMonthColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_MONTH);
 //            int startYearColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_YEAR);
 
 //            int endDateColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MED_END_DATE);
@@ -820,9 +830,12 @@ public class EditorActivity extends AppCompatActivity implements
             String Description = cursor.getString(DescriptionColumnIndex);
             int frequency = cursor.getInt(FrequencyColumnIndex);
             String startDate = cursor.getString(startDateColumnIndex);
-//            String  sEndDate = cursor.getString(endDateColumnIndex);
-//            String startDay = cursor.getString(startDayColumnIndex);
-//            String startMonth = cursor.getString(startMonthColumnIndex);
+
+            String duration = cursor.getString(durationColumnIndex);
+            String startMonth = cursor.getString(startMonthColumnIndex);
+
+            Toast.makeText(this, "duration: " + duration +  "startMonth: "  + startMonth,
+                    Toast.LENGTH_SHORT).show();
 //            String startYear = cursor.getString(startYearColumnIndex);
 
 
@@ -830,8 +843,8 @@ public class EditorActivity extends AppCompatActivity implements
             mNameEditText.setText(Medname);
             mDescriptionEditText.setText(Description);
 
-            mCurrentDate.setTimeInMillis(Long.parseLong(startDate));
-            Date dStartDate= mCurrentDate.getTime();
+            calStartDate.setTimeInMillis(Long.parseLong(startDate));
+            Date dStartDate= calStartDate.getTime();
             dateToShow =  convertDateTo.format(dStartDate);
             Toast.makeText(this, dateToShow,
                     Toast.LENGTH_SHORT).show();
@@ -839,12 +852,14 @@ public class EditorActivity extends AppCompatActivity implements
 
             mStartDate.setText(dateToShow);
 
-
-//            calEndDate.setTimeInMillis(Long.parseLong(sEndDate));
-//            Date dEndDate= calEndDate.getTime();
-//            String showEndDate =  convertDateTo.format(dEndDate);
-//
-//            mEndDate.setText(showEndDate);
+            String  sEndDate = cursor.getString(endDateColumnIndex);
+            calEndDate.setTimeInMillis(Long.parseLong(sEndDate));
+            Date dEndDate= calEndDate.getTime();
+            String showEndDate =  convertDateTo.format(dEndDate);
+            Toast.makeText(this, showEndDate,
+                    Toast.LENGTH_SHORT).show();
+            mEndDate.setVisibility(View.VISIBLE);
+            mEndDate.setText(showEndDate);
 
             // Gender is a dropdown spinner, so map the constant value from the database
             // into one of the dropdown options (0 is Unknown, 1 is Male, 2 is Female).

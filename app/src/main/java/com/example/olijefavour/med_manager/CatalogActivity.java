@@ -24,8 +24,6 @@ import android.widget.ListView;
 
 import com.crashlytics.android.Crashlytics;
 
-import java.util.ArrayList;
-
 import io.fabric.sdk.android.Fabric;
 
 public class CatalogActivity extends AppCompatActivity
@@ -233,7 +231,7 @@ private static final int PET_LOADER = 0;
                 MedManagerContract.MedManagerEntry._ID,
                 MedManagerContract.MedManagerEntry.COLUMN_MEDICATION_NAME,
                 MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION,
-                MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS
+                MedManagerContract.MedManagerEntry.COLUMN_MED_END_DATE,
         };
 
         // This loader will execute the ContentProvider's query method on a background thread

@@ -102,13 +102,13 @@ public final class MedManagerContract {
          * Type: INTEGER
 //         */
         public final static String COLUMN_FREQUENCY_INTERVAL = "interval";
-
-        /**
-         * Weight of the pet.
-         *
-         * Type: INTEGER
-         */
-        public final static String COLUMN_NUMBER_OF_MED_DAYS = "duration_of_medication";
+//
+//        /**
+//         * Weight of the pet.
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String COLUMN_NUMBER_OF_MED_DAYS = "duration_of_medication";
 
 //        /**
 //         * Weight of the pet.
@@ -152,7 +152,7 @@ public final class MedManagerContract {
          *
          * Type: INTEGER
          */
-        public final static String COLUMN_START_DATE = "started_this_month";
+        public final static String COLUMN_START_DATE = "med_starts";
 
 
 
@@ -163,18 +163,18 @@ public final class MedManagerContract {
          */
         public final static String COLUMN_MED_END_DATE = "med_ends";
 
-//        /**
-//         * Stoped takinhg the medication.
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String  COLUMN_NUMBER_OF_MED_DAYS = "sday";
-//        /**
-//         * Stoped takinhg the medication.
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String COLUMN_START_MONTH = "smonth";
+        /**
+         * Stoped takinhg the medication.
+         *
+         * Type: INTEGER
+         */
+        public final static String COLUMN_NUMBER_OF_MED_DAYS = "duration_of_medication";
+        /**
+         * Stoped takinhg the medication.
+         *
+         * Type: INTEGER
+         */
+        public final static String COLUMN_START_MONTH = "start_month";
 //        /**
 //         * Stoped takinhg the medication.
 //         *

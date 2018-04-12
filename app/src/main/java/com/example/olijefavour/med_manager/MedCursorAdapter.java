@@ -76,14 +76,14 @@ public class MedCursorAdapter extends CursorAdapter {
         int medNameColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MEDICATION_NAME);
         int descriptionColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION);
 //        int medDaysColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS);
-//        int endColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MED_END_DATE);
+        int endColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_MED_END_DATE);
 //        int startColumnIndex = cursor.getColumnIndex(MedManagerContract.MedManagerEntry.COLUMN_START_DATE);
         // Read the pet attributes from the Cursor for the current pet
         String medNameName = cursor.getString(medNameColumnIndex);
         String medDescription = cursor.getString(descriptionColumnIndex);
 //        String DISK = cursor.getString(medDaysColumnIndex);
 
-//        String olll = cursor.getString(endColumnIndex);
+        String olll = cursor.getString(endColumnIndex);
 //        String sta = cursor.getString(startColumnIndex);
 
         // If the pet breed is
@@ -97,7 +97,7 @@ public class MedCursorAdapter extends CursorAdapter {
         nameTextView.setText(medNameName);
         summaryTextView.setText(medDescription);
 //        summaryTextView.append(DISK);
-//        summaryTextView.append(olll);
+        summaryTextView.append(olll);
 //        summaryTextView.append("End    start: "  +sta);
 
     }

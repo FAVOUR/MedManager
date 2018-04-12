@@ -206,8 +206,8 @@ public class MedManagerProvider extends ContentProvider {
         if (medNumberOfDays!= null) {
             throw new IllegalArgumentException("Medication requires valid numberofDays");
         }
-//
-//
+
+
 //        String medStartMonth = values.getAsString(MedManagerEntry.COLUMN_START_MONTH);
 //        if (medStartMonth.isEmpty()) {
 //            throw new IllegalArgumentException("Medication requires valid startmonth");
@@ -281,7 +281,7 @@ public class MedManagerProvider extends ContentProvider {
             }
         }
 // If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
-        // check that the weight value is valid.
+//         check that the weight value is valid.
         if (values.containsKey(MedManagerEntry.COLUMN_START_DATE)) {
             // Check that the weight is greater than or equal to 0 kg
             String startDate = values.getAsString(MedManagerEntry.COLUMN_START_DATE);
@@ -290,33 +290,33 @@ public class MedManagerProvider extends ContentProvider {
             }
         }
 
-//        if (values.containsKey(MedManagerEntry.COLUMN_MED_END_DATE)) {
-//            // Check that the weight is greater than or equal to 0 kg
-//            String startDate = values.getAsString(MedManagerEntry.COLUMN_MED_END_DATE);
-//            if (startDate.isEmpty()) {
-//                throw new IllegalArgumentException("Medication requires valid startdate");
-//            }
-//        }
+        if (values.containsKey(MedManagerEntry.COLUMN_MED_END_DATE)) {
+            // Check that the weight is greater than or equal to 0 kg
+            String startDate = values.getAsString(MedManagerEntry.COLUMN_MED_END_DATE);
+            if (startDate.isEmpty()) {
+                throw new IllegalArgumentException("Medication requires valid startdate");
+            }
+        }
 
-////        If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
-//        // check that the weight value is valid.
-//        if (values.containsKey(MedManagerEntry.COLUMN_START_DATE)) {
-//            // Check that the weight is greater than or equal to 0 kg
-//            String startDate = values.getAsString(MedManagerEntry.COLUMN_START_DATE);
-//            if (startDate.isEmpty()) {
-//                throw new IllegalArgumentException("Medication requires valid weight");
-//            }
-//        }
+//        If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
+        // check that the weight value is valid.
+        if (values.containsKey(MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS)) {
+            // Check that the weight is greater than or equal to 0 kg
+            String startDate = values.getAsString(MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS);
+            if (startDate.isEmpty()) {
+                throw new IllegalArgumentException("Medication requires valid number of days");
+            }
+        }
 //
-// //       If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
-//        // check that the weight value is valid.
-//        if (values.containsKey(MedManagerEntry.COLUMN_START_DATE)) {
-//            // Check that the weight is greater than or equal to 0 kg
-//            String startDate = values.getAsString(MedManagerEntry.COLUMN_START_DATE);
-//            if (startDate.isEmpty()) {
-//                throw new IllegalArgumentException("Medication requires valid weight");
-//            }
-//        }
+ //       If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
+        // check that the weight value is valid.
+        if (values.containsKey(MedManagerEntry.COLUMN_START_MONTH)) {
+            // Check that the weight is greater than or equal to 0 kg
+            String startDate = values.getAsString(MedManagerEntry.COLUMN_START_MONTH);
+            if (startDate.isEmpty()) {
+                throw new IllegalArgumentException("Medication requires valid start month");
+            }
+        }
 //
 // //       If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
 //        // check that the weight value is valid.
