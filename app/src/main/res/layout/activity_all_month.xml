@@ -4,27 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.olijefavour.med_manager.Month2Activity"
-    android:orientation="vertical">
+    android:textColor="@color/colorPrimaryDark"
+    tools:context="com.example.olijefavour.med_manager.AllMonths"
 
+    android:orientation="vertical">
+    <!--android:background="#dadbde"-->
     <LinearLayout
         android:id="@+id/month_tab"
-        android:background="#c49d9d"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
-        android:textColor="@color/colorPrimary"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
+        <!--"#303F9F"-->
         <TextView
             android:id="@+id/january"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:gravity="center_vertical|center_horizontal"
-            android:onClick="january"
             android:layout_margin="8dp"
+            android:textSize="22dp"
+
             android:text="@string/january"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="#303F9F"
+             />
 
 
 

@@ -129,23 +129,25 @@ public class MedManagerProvider extends ContentProvider {
                         null, null, sortOrder);
                 break;
 
-//            case MED_MANAGER_MONTH:
-//                // For the MED_MANAGER_ID code, extract out the ID from the URI.
-//                // For an example URI such as "content://com.example.android.pets/pets/3",
-//                // the selection will be "_id=?" and the selection argument will be a
-//                // String array containing the actual ID of 3 in this case.
-//                //
-//                // For every "?" in the selection, we need to have an element in the selection
-//                // arguments that will fill in the "?". Since we have 1 question mark in the
-//                // selection, we have 1 String in the selection arguments' String array.
-//                selection = MedManagerEntry.COLUMN_START_MONTH + "=?";
-//                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
-//
-//                // This will perform a query on the pets table where the _id equals 3 to return a
-//                // Cursor containing that row of the table.
-//                cursor = database.query(MedManagerEntry.TABLE_NAME, projection, selection, selectionArgs,
-//                        null, null, sortOrder);
-//                break;
+
+
+            case MED_MANAGER_MONTH:
+                // For the MED_MANAGER_ID code, extract out the ID from the URI.
+                // For an example URI such as "content://com.example.android.pets/pets/3",
+                // the selection will be "_id=?" and the selection argument will be a
+                // String array containing the actual ID of 3 in this case.
+                //
+                // For every "?" in the selection, we need to have an element in the selection
+                // arguments that will fill in the "?". Since we have 1 question mark in the
+                // selection, we have 1 String in the selection arguments' String array.
+                selection = MedManagerEntry.COLUMN_START_MONTH + "=?";
+                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri))};
+
+                // This will perform a query on the pets table where the _id equals 3 to return a
+                // Cursor containing that row of the table.
+                cursor = database.query(MedManagerEntry.TABLE_NAME, projection, selection, selectionArgs,
+                        null, null, sortOrder);
+                break;
             default:
                 throw new IllegalArgumentException("Cannot query unknown URI " + uri);
         }
@@ -156,6 +158,25 @@ public class MedManagerProvider extends ContentProvider {
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
 
         // Return the cursor
+        return cursor;
+    }
+
+
+    private Cursor searchResult(String selection, String[] selectionArgs, String[] columns) {
+        // Get readable database
+        SQLiteDatabase database = mDbHelper.getReadableDatabase();
+
+        // This cursor will hold the result of the query
+        Cursor cursor;
+        cursor = database.query(MedManagerEntry.TABLE_NAME,columns,selection,selectionArgs,null,null,null);
+//
+//        if (cursor == null) {
+//            return null;
+//        } else if (!cursor.moveToFirst()) {
+//            cursor.close();
+//            return null;
+//        }
+//        cursor.close();
         return cursor;
     }
 
@@ -175,10 +196,10 @@ public class MedManagerProvider extends ContentProvider {
      * for that specific row in the database.
      */
     private Uri insertMedData(Uri uri, ContentValues values) {
-        // Check that the name is not null
+        // Check that the searchName is not null
         String name = values.getAsString(MedManagerEntry.COLUMN_MEDICATION_NAME);
         if (name == null) {
-            throw new IllegalArgumentException("Medication requires a name");
+            throw new IllegalArgumentException("Medication requires a searchName");
         }
 
         // Check that the frequency is valid
@@ -200,19 +221,34 @@ public class MedManagerProvider extends ContentProvider {
         if (endMedicatio.isEmpty()) {
             throw new IllegalArgumentException("Medication requires valid EndDate");
         }
-//
-//
+
+
         Integer medNumberOfDays = values.getAsInteger(MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS);
-        if (medNumberOfDays!= null) {
+        if (medNumberOfDays<0) {
             throw new IllegalArgumentException("Medication requires valid numberofDays");
         }
 
 
-//        String medStartMonth = values.getAsString(MedManagerEntry.COLUMN_START_MONTH);
-//        if (medStartMonth.isEmpty()) {
-//            throw new IllegalArgumentException("Medication requires valid startmonth");
-//        }
-//
+        String medStartMonth = values.getAsString(MedManagerEntry.COLUMN_START_MONTH);
+        if (medStartMonth.isEmpty()) {
+            throw new IllegalArgumentException("Medication requires valid startmonth");
+        }
+
+
+        String medDosage= values.getAsString(MedManagerEntry.COLUMN_DOSAGE);
+        if (medDosage.isEmpty()) {
+            throw new IllegalArgumentException("Medication requires valid dosage");
+        }
+
+        String medTiming= values.getAsString(MedManagerEntry.COLUMN_TIME);
+        if (medTiming.isEmpty()) {
+            throw new IllegalArgumentException("Medication requires valid time");
+        }
+        // If the weight is provided, check that it's greater than or equal to 0 kg
+        Integer timeIntervalaDay = values.getAsInteger(MedManagerEntry.COLUMN_INTAKE_TIME);
+        if ( timeIntervalaDay!= null && medInterval < 0) {
+            throw new IllegalArgumentException("Medication requires valid interval");
+        }
 //
 //        String medicationStartYear = values.getAsString(MedManagerEntry.COLUMN_START_YEAR);
 //        if (medicationStartYear.isEmpty()) {
@@ -264,11 +300,11 @@ public class MedManagerProvider extends ContentProvider {
      */
     private int updateMedication(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         // If the {@link MedManagerEntry#COLUMN_MEDICATION_NAME} key is present,
-        // check that the name value is not null.
+        // check that the searchName value is not null.
         if (values.containsKey(MedManagerEntry.COLUMN_MEDICATION_NAME)) {
             String name = values.getAsString(MedManagerEntry.COLUMN_MEDICATION_NAME);
             if (name == null) {
-                throw new IllegalArgumentException("Medication requires a name");
+                throw new IllegalArgumentException("Medication requires a searchName");
             }
         }
 
@@ -280,6 +316,16 @@ public class MedManagerProvider extends ContentProvider {
                 throw new IllegalArgumentException("Medication requires valid frequency_interval");
             }
         }
+
+        // If the {@link MedManagerEntry#COLUMN_FREQUENCY_INTERVAL} key is present,
+        // check that the gender value is valid.
+        if (values.containsKey(MedManagerEntry.COLUMN_INTAKE_TIME)) {
+            Integer timeIntervalaDay = values.getAsInteger(MedManagerEntry.COLUMN_INTAKE_TIME);
+            if (timeIntervalaDay == null) {
+                throw new IllegalArgumentException("Medication requires valid time_interval_a_day");
+            }
+        }
+
 // If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
 //         check that the weight value is valid.
         if (values.containsKey(MedManagerEntry.COLUMN_START_DATE)) {
@@ -302,8 +348,8 @@ public class MedManagerProvider extends ContentProvider {
         // check that the weight value is valid.
         if (values.containsKey(MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS)) {
             // Check that the weight is greater than or equal to 0 kg
-            String startDate = values.getAsString(MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS);
-            if (startDate.isEmpty()) {
+            Integer medNumberOfDays = values.getAsInteger(MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS);
+            if (medNumberOfDays<0) {
                 throw new IllegalArgumentException("Medication requires valid number of days");
             }
         }
@@ -317,7 +363,32 @@ public class MedManagerProvider extends ContentProvider {
                 throw new IllegalArgumentException("Medication requires valid start month");
             }
         }
+        if (values.containsKey(MedManagerEntry.COLUMN_DOSAGE)) {
+            // Check that the weight is greater than or equal to 0 kg
+            String dosge = values.getAsString(MedManagerEntry.COLUMN_DOSAGE);
+            if (dosge.isEmpty()) {
+                throw new IllegalArgumentException("Medication requires valid dosage");
+            }
+        }
+
+        if (values.containsKey(MedManagerEntry.COLUMN_TIME)) {
+            // Check that the weight is greater than or equal to 0 kg
+            String times = values.getAsString(MedManagerEntry.COLUMN_TIME);
+            if (times.isEmpty()) {
+                throw new IllegalArgumentException("Medication requires valid time");
+            }
+        }
+
+//        String medDosage = values.getAsString(MedManagerEntry.COLUMN_DOSAGE);
+//        if (medStartMonth.isEmpty()) {
+//            throw new IllegalArgumentException("Medication requires valid dosage");
+//        }
 //
+//        String medTiming = values.getAsString(MedManagerEntry.COLUMN_TIME);
+//        if (medStartMonth.isEmpty()) {
+//            throw new IllegalArgumentException("Medication requires valid time");
+//        }
+
 // //       If the {@link MedManagerEntry#COLUMN_PET_WEIGHT} key is present,
 //        // check that the weight value is valid.
 //        if (values.containsKey(MedManagerEntry.COLUMN_START_DATE)) {

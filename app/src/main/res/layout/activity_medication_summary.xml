@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="com.example.olijefavour.med_manager.MedicationSummary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:padding="10dp"
+                android:orientation="horizontal">
+                <!-- Name field -->
+                <TextView
+                    android:id="@+id/med_name_title"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:layout_marginBottom="20dp"
+                    android:text="Medication Name "
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16dp"
+
+                    />
+
+                <!-- Breed field -->
+                <TextView
+                    android:id="@+id/med_name"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textColor="#ffffff"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:textSize="15dp"
+                    android:text="medication name " />
+            </LinearLayout>
+
+            <!-- Input fields -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/drug_description_title"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorAccent"
+                    android:layout_marginBottom="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="Medication Description "
+                    android:textSize="16dp"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/drug_description"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textColor="#ffffff"
+                    android:textSize="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="match_parent"
+                    android:text="medication description " />
+            </LinearLayout>
+
+
+
+
+        <!--Measurement category-->
+        <!--<LinearLayout-->
+        <!--android:id="@+id/container_measurement"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--&lt;!&ndash; Label &ndash;&gt;-->
+        <!--<TextView-->
+        <!--android:text="@string/category_description"-->
+        <!--style="@style/CategoryStyle" />-->
+
+        <!--&lt;!&ndash; Input fields &ndash;&gt;-->
+        <!--<RelativeLayout-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_weight="2"-->
+        <!--android:paddingLeft="4dp">-->
+
+        <!--&lt;!&ndash; Weight field &ndash;&gt;-->
+        <!--<EditText-->
+        <!--android:id="@+id/edit_pet_weight"-->
+        <!--android:hint="@string/hint_pet_weight"-->
+        <!--android:inputType="number"-->
+        <!--style="@style/EditorFieldStyle" />-->
+
+        <!--&lt;!&ndash; Units for weight (kg) &ndash;&gt;-->
+        <!--<TextView-->
+        <!--android:id="@+id/label_weight_units"-->
+        <!--android:text="@string/unit_pet_weight"-->
+        <!--style="@style/EditorUnitsStyle"/>-->
+        <!--</RelativeLayout>-->
+        <!--</LinearLayout>-->
+
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:orientation="vertical"-->
+                <!--&gt;-->
+                <!--<TextView-->
+                    <!--android:id="@+id/reminder_times"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:textColor="@color/colorAccent"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:text="Reminder Times" />-->
+                <!--&lt;!&ndash; Gender category &ndash;&gt;-->
+
+
+            <LinearLayout
+                android:id="@+id/dosage_time_"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <!-- Label -->
+                <TextView
+                    android:id="@+id/frequency_title"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorAccent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/frequency"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/frequency"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textColor="#ffffff"
+                    android:textSize="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:paddingRight="16dp"
+                    android:text="Twice a day" />
+            </LinearLayout>
+
+
+
+
+
+            <!--<TextView-->
+                <!--android:id="@+id/schedule"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignBottom="@+id/duration"-->
+                <!--android:layout_marginBottom="19dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_toEndOf="@+id/end_date"-->
+                <!--android:layout_toRightOf="@+id/end_date"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="Medication Schedule"-->
+                <!--android:textColor="@color/colorAccent"-->
+                <!--android:textSize="20dp" />-->
+            <!--&lt;!&ndash; Schedule category &ndash;&gt;-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+
+                <TextView
+                    android:id="@+id/start_time_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorAccent"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="1"
+                    android:text="Start date:"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/start_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:textColor="#ffffff"
+                    android:layout_weight="1"
+                    android:text="28/05/18"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+                <!-- End date  -->
+                <TextView
+                    android:id="@+id/number_of_days_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/colorAccent"
+                    android:text="To Be taken For : "
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/number_of_days"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="13dp"
+                    android:textSize="15dp"
+                    android:textColor="#ffffff"
+                    android:layout_weight="1"
+                    android:text="wannabe " />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/end_date_title"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/number_of_days"
+                    android:textColor="@color/colorAccent"
+                    android:text="End date:"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/end_date"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:layout_marginRight="10dp"
+                    android:text="28/05/18"
+                    android:textSize="15dp" />
+
+
+
+            </LinearLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_gravity="top|right"
+                android:layout_marginRight="30dp"
+                android:clickable="true"
+                app:srcCompat="@android:drawable/ic_menu_edit" />
+
+
+
+
+        </LinearLayout>
+
+    <!--</android.support.v7.widget.CardView>-->
+</ScrollView>
+
+

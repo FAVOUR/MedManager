@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.olijefavour.med_manager">
 
+
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,16 +15,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:resource="@xml/searchable"
+            android:value=".SearchActivity" />
+
         <activity
-            android:name=".CatalogActivity"
+            android:name=".Welcome_activity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+           >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchActivity" />
+
+            <!-- <meta-data -->
+            <!-- android:name="android.app.searchable" -->
+            <!-- android:resource="@xml/searchable" /> -->
         </activity>
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity
             android:name=".EditorActivity"
             android:label="@string/title_activity_editor_"
@@ -40,15 +64,46 @@
             android:name="io.fabric.ApiKey"
             android:value="e8e8546e74daaf0050baa58dcc5a1aff1044602d" />
 
-        <activity
-            android:name=".MonthActivity"
-            android:theme="@style/AppTheme" />
+        <!-- <activity -->
+        <!-- android:name=".MonthActivity" -->
+        <!-- android:theme="@style/AppTheme" /> -->
         <activity android:name=".MonthsActivity" />
-        <activity android:name=".Month2Activity" />
+        <activity android:name=".AllMonths">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CatalogActivity" />
+        </activity>
         <activity
             android:name=".Timeinterval"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".EachDayActivity"></activity>
+        <activity android:name=".EachDayActivity" />
+        <activity android:name=".SearchActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CatalogActivity" />
+        </activity>
+        <activity
+            android:name=".MedicationSummary"
+            android:label="Medication Summary">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CatalogActivity" />
+        </activity>
+        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".CatalogActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+           ></activity>
     </application>
 
 </manifest>

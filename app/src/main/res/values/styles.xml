@@ -8,15 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.NoActionBar" >
+    <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>
-    <!--<style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">-->
-        <!--<item name="windowActionBar">false</item>-->
-        <!--<item name="windowNoTitle">true</item>-->
-        <!--<item name="android:windowFullscreen">true</item>-->
+    <!--<stsearchNamename="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">-->
+    <!--<isearchNamename="windowActionBar">false</item>-->
+    <!--<isearchNamename="windowNoTitle">true</item>-->
+    <!--<isearchNamename="android:windowFullscreen">true</item>-->
     <!--</style>-->
     <style name="AppCompat" parent="Theme.AppCompat.NoActionBar">
 
@@ -25,13 +25,14 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="CategoryStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:paddingTop">16dp</item>
         <item name="android:textColor">@color/colorAccent</item>
-        <!--<item name="android:fontFamily">sans-serif-medium</item>-->
+        <!--<isearchNamename="android:fontFamily">sans-serif-medium</item>-->
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
     </style>
 
@@ -39,7 +40,7 @@
     <style name="EditorFieldStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
-        <!--<item name="android:fontFamily">sans-serif-light</item>-->
+        <!--<isearchNamename="android:fontFamily">sans-serif-light</item>-->
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
 
@@ -60,28 +61,28 @@
         <item name="colorPrimaryDark">@color/editorColorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-<!--</resources>-->
+    <!--</resources>-->
     <!--<?xml version="1.0" encoding="utf-8"?>-->
     <!--&lt;!&ndash; Copyright (C) 2016 The Android Open Source Project-->
-         <!--Licensed under the Apache License, Version 2.0 (the "License");-->
-         <!--you may not use this file except in compliance with the License.-->
-         <!--You may obtain a copy of the License at-->
-              <!--http://www.apache.org/licenses/LICENSE-2.0-->
-         <!--Unless required by applicable law or agreed to in writing, software-->
-         <!--distributed under the License is distributed on an "AS IS" BASIS,-->
-         <!--WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.-->
-         <!--See the License for the specific language governing permissions and-->
-         <!--limitations under the License.-->
+    <!--Licensed under the Apache License, Version 2.0 (the "License");-->
+    <!--you may not use this file except in compliance with the License.-->
+    <!--You may obtain a copy of the License at-->
+    <!--http://www.apache.org/licenses/LICENSE-2.0-->
+    <!--Unless required by applicable law or agreed to in writing, software-->
+    <!--distributed under the License is distributed on an "AS IS" BASIS,-->
+    <!--WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.-->
+    <!--See the License for the specific language governing permissions and-->
+    <!--limitations under the License.-->
     <!--&ndash;&gt;-->
-<!--<resources>-->
-<!--&lt;!&ndash; Base application theme &ndash;&gt;-->
-<!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
-    <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-    <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-    <!--<item name="colorAccent">@color/colorAccent</item>-->
-<!--</style>-->
+    <!--<resources>-->
+    <!--&lt;!&ndash; Base application theme &ndash;&gt;-->
+    <!--<stsearchNamename="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+    <!--<isearchNamename="colorPrimary">@color/colorPrimary</item>-->
+    <!--<isearchNamename="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+    <!--<isearchNamename="colorAccent">@color/colorAccent</item>-->
+    <!--</style>-->
 
 
-<!--&lt;!&ndash; Style for a category in the editor &ndash;&gt;-->
+    <!--&lt;!&ndash; Style for a category in the editor &ndash;&gt;-->
 
 </resources>

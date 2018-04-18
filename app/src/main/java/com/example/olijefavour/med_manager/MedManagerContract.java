@@ -29,9 +29,9 @@ public final class MedManagerContract {
     private MedManagerContract() {}
 
     /**
-     * The "Content authority" is a name for the entire content provider, similar to the
-     * relationship between a domain name and its website.  A convenient string to use for the
-     * content authority is the package name for the app, which is guaranteed to be unique on the
+     * The "Content authority" is a searchName for the entire content provider, similar to the
+     * relationship between a domain searchName and its website.  A convenient string to use for the
+     * content authority is the package searchName for the app, which is guaranteed to be unique on the
      * device.
      */
     public static final String CONTENT_AUTHORITY = "com.example.olijefavour.med_manager";
@@ -102,51 +102,6 @@ public final class MedManagerContract {
          * Type: INTEGER
 //         */
         public final static String COLUMN_FREQUENCY_INTERVAL = "interval";
-//
-//        /**
-//         * Weight of the pet.
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String COLUMN_NUMBER_OF_MED_DAYS = "duration_of_medication";
-
-//        /**
-//         * Weight of the pet.
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String COLUMN_START_MONTH= "start_month";
-
-
-//        /**
-//         * Weight of the pet.
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String COLUMN_START_YEAR= "start_year";
-
-//        /**
-//         * Weight of the pet.
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String COLUMN_END_DAY= "end_day";
-
-//        /**
-//         * Weight of the pet.
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String COLUMN_END_MONTH= "end_month";
-
-
-//        /**
-//         * Weight of the pet.
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String COLUMN_END_YEAR= "end_year";
-
         /**
          * Started taken the medication.
          *
@@ -154,7 +109,13 @@ public final class MedManagerContract {
          */
         public final static String COLUMN_START_DATE = "med_starts";
 
-
+        /**
+         * frequency/Interval for taking the medication.
+         *
+         *
+         * Type: INTEGER
+         //         */
+        public final static String COLUMN_INTAKE_TIME = "time_intervals_a_day";
 
         /**
          * Stoped takinhg the medication.
@@ -175,53 +136,27 @@ public final class MedManagerContract {
          * Type: INTEGER
          */
         public final static String COLUMN_START_MONTH = "start_month";
-//        /**
-//         * Stoped takinhg the medication.
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String COLUMN_START_YEAR = "syear";
-//
-//        /**
-//         * Stoped takinhg the medication.
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String  COLUMN_END_DAY = "eday";
-//        /**
-//         * Stoped takinhg the medication.
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String COLUMN_END_MONTH = "emonth";
-//        /**
-//         * Stoped takinhg the medication.
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String COLUMN_END_YEAR = "eyear";
-//        /**
-//         * Stoped takinhg the medication.
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String COLUMN_MILLS_TIME_START = "smiltime";
-//        /**
-//         * Stoped takinhg the medication.
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String COLUMN_MILLS_TIME_END = "emilltime";
-//        /**
-//         * Stoped takinhg the medication.
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String COLUMN_TIME_FREQUENCY = "timefreq";
+
+        /**
+         * Stoped takinhg the medication.
+         *
+         * Type: INTEGER
+         */
+        public final static String COLUMN_DOSAGE = "dosage";
+
+
+        /**
+         * Stoped takinhg the medication.
+         *
+         * Type: INTEGER
+         */
+        public final static String COLUMN_TIME = "timing";
+
+
         /**
          * Possible frequencies.
          */
-        public static final int FREQUENCY = 0;
+        public static final int DEFAULT_FREQUENCY = 0;
         public static final int ONCE_A_DAY = 1;
         public static final int TWICE_A_DAY = 2;
         public static final int TRICE_A_DAY = 3;
@@ -234,18 +169,18 @@ public final class MedManagerContract {
         public static final int TEN_TIMES_A_DAY = 10;
         public static final int ELEVEN_TIMES_A_DAY = 11;
         public static final int TWELVE_TIMES_A_DAY = 12;
-        public static final int EVERY_ONE_HOUR = 1;
-        public static final int EVERY_TWO_HOUR = 2;
-        public static final int EVERY_THREE_HOUR = 3;
-        public static final int EVERY_FOUR_HOUR = 4;
-        public static final int EVERY_FIVE_HOUR = 5;
-        public static final int EVERY_SIX_HOUR = 6;
-        public static final int EVERY_SEVEN_HOUR = 7;
-        public static final int EVERY_EIGHT_HOUR = 8;
-        public static final int EVERY_NINE_HOUR = 9;
-        public static final int EVERY_TEN_HOUR = 10;
-        public static final int EVERY_ELEVEN_HOUR = 11;
-        public static final int EVERY_TWELVE_HOUR = 12;
+//        public static final int EVERY_ONE_HOUR = 1;
+//        public static final int EVERY_TWO_HOUR = 2;
+//        public static final int EVERY_THREE_HOUR = 3;
+//        public static final int EVERY_FOUR_HOUR = 4;
+//        public static final int EVERY_FIVE_HOUR = 5;
+//        public static final int EVERY_SIX_HOUR = 6;
+//        public static final int EVERY_SEVEN_HOUR = 7;
+//        public static final int EVERY_EIGHT_HOUR = 8;
+//        public static final int EVERY_NINE_HOUR = 9;
+//        public static final int EVERY_TEN_HOUR = 10;
+//        public static final int EVERY_ELEVEN_HOUR = 11;
+//        public static final int EVERY_TWELVE_HOUR = 12;
 
 //
 //        /**

@@ -29,7 +29,7 @@ public class MedDbHelper extends SQLiteOpenHelper {
     public static final String LOG_TAG = MedDbHelper.class.getSimpleName();
 
     /** Name of the database file */
-    private static final String DATABASE_NAME = "med.db";
+    private static final String DATABASE_NAME = "medi.db";
 
     /**
      * Database version. If you change the database schema, you must increment the database version.
@@ -57,10 +57,11 @@ public class MedDbHelper extends SQLiteOpenHelper {
                 + MedManagerEntry.COLUMN_MED_DESCRIPTION + " TEXT, "
                 + MedManagerEntry.COLUMN_START_DATE + " TEXT NOT NULL, "
                 + MedManagerEntry.COLUMN_NUMBER_OF_MED_DAYS + " INTEGER NOT NULL, "
-//                + MedManagerEntry.COLUMN_START_MONTH + " TEXT, "
-////                + MedManagerEntry.COLUMN_START_YEAR + " TEXT, "
+                + MedManagerEntry.COLUMN_START_MONTH + " TEXT, "
+                + MedManagerEntry.COLUMN_DOSAGE + " TEXT, "
+                + MedManagerEntry.COLUMN_TIME + " TEXT, "
                 + MedManagerEntry.COLUMN_MED_END_DATE + " TEXT NOT NULL, "
-
+                + MedManagerEntry.COLUMN_INTAKE_TIME + " INTEGER NOT NULL, "
                 + MedManagerEntry.COLUMN_FREQUENCY_INTERVAL + " INTEGER NOT NULL);";
 
         // Execute the SQL statement

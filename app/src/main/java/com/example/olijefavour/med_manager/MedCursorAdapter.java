@@ -38,6 +38,7 @@ public class MedCursorAdapter extends CursorAdapter {
      * @param c       The cursor from which to get the data.
      */
     public MedCursorAdapter(Context context, Cursor c) {
+
         super(context, c, 0 /* flags */);
     }
 
@@ -58,7 +59,7 @@ public class MedCursorAdapter extends CursorAdapter {
 
     /**
      * This method binds the pet data (in the current row pointed to by cursor) to the given
-     * list item layout. For example, the name for the current pet can be set on the name TextView
+     * list item layout. For example, the searchName for the current pet can be set on the searchName TextView
      * in the list item layout.
      *
      * @param view    Existing view, returned earlier by newView() method
@@ -97,7 +98,7 @@ public class MedCursorAdapter extends CursorAdapter {
         nameTextView.setText(medNameName);
         summaryTextView.setText(medDescription);
 //        summaryTextView.append(DISK);
-        summaryTextView.append(olll);
+//        summaryTextView.append(olll);
 //        summaryTextView.append("End    start: "  +sta);
 
     }

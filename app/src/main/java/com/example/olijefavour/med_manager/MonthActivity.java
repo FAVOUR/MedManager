@@ -14,7 +14,7 @@
 //    }
 //
 //    public void january(View view) {
-//        Intent intent = new Intent(MonthActivity.this,Month2Activity.class);
+//        Intent intent = new Intent(MonthActivity.this,AllMonths.class);
 //        intent.putExtra("month", 2);
 //        startActivity(intent);
 //    }

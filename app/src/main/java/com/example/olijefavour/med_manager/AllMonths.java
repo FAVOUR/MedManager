@@ -7,22 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.olijefavour.med_manager.MonthsFragment.AprilFragment;
-import com.example.olijefavour.med_manager.MonthsFragment.AugustFragment;
-import com.example.olijefavour.med_manager.MonthsFragment.DecemberFragment;
-import com.example.olijefavour.med_manager.MonthsFragment.FebuaryFragment;
-import com.example.olijefavour.med_manager.MonthsFragment.JanuaryFragment;
-import com.example.olijefavour.med_manager.MonthsFragment.JulyFragment;
-import com.example.olijefavour.med_manager.MonthsFragment.JuneFragment;
-import com.example.olijefavour.med_manager.MonthsFragment.MarchFragment;
-import com.example.olijefavour.med_manager.MonthsFragment.MayFragment;
-import com.example.olijefavour.med_manager.MonthsFragment.NovemberFragment;
-import com.example.olijefavour.med_manager.MonthsFragment.OctoberFragment;
-import com.example.olijefavour.med_manager.MonthsFragment.SeptemberFragment;
-
 import java.util.Calendar;
 
-public class Month2Activity extends AppCompatActivity {
+public class AllMonths extends AppCompatActivity {
 
     private TextView mJanuary;
     private TextView mFebuary;
@@ -45,7 +32,7 @@ public class Month2Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_month2);
+        setContentView(R.layout.activity_all_month);
 
         mJanuary = (TextView) findViewById(R.id.january);
         mFebuary = (TextView) findViewById(R.id.febrary);
@@ -206,7 +193,7 @@ public class Month2Activity extends AppCompatActivity {
                 break;
             case 4:
                 mJanuary.setVisibility(View.GONE);
-                mJanuary.setTextSize(16);
+                mJanuary.setTextSize(22);
                 mFebuary.setTextSize(22);
                 mFebuary.setVisibility(View.GONE);
                 mMarch.setVisibility(View.GONE);
@@ -253,20 +240,17 @@ public class Month2Activity extends AppCompatActivity {
             break;
             case 6:
                 mJanuary.setVisibility(View.GONE);
-                mJanuary.setTextSize(16);
+                mJanuary.setTextSize(22);
                 mFebuary.setTextSize(22);
                 mFebuary.setVisibility(View.GONE);
                 mMarch.setTextSize(22);
-                mMarch.setTextColor(Color.parseColor("#303F9F"));
+
                 mMarch.setVisibility(View.GONE);
                 mApril.setTextSize(22);
-                mApril.setTextColor(Color.parseColor("#303F9F"));
                 mApril.setVisibility(View.GONE);
                 mMay.setTextSize(22);
-                mMay.setTextColor(Color.parseColor("#303F9F"));
                 mMay.setVisibility(View.GONE);
                 mJune.setTextSize(22);
-                mJune.setTextColor(Color.parseColor("#303F9F"));
                 mJune.setVisibility(View.GONE);
                 mJuly.setTextSize(22);
                 mJuly.setTextColor(Color.parseColor("#303F9F"));
@@ -285,23 +269,18 @@ public class Month2Activity extends AppCompatActivity {
                 break;
             case 7:
                 mJanuary.setVisibility(View.GONE);
-                mJanuary.setTextSize(16);
+                mJanuary.setTextSize(22);
                 mFebuary.setTextSize(22);
                 mFebuary.setVisibility(View.GONE);
                 mMarch.setTextSize(22);
-                mMarch.setTextColor(Color.parseColor("#303F9F"));
                 mMarch.setVisibility(View.GONE);
                 mApril.setTextSize(22);
-                mApril.setTextColor(Color.parseColor("#303F9F"));
                 mApril.setVisibility(View.GONE);
                 mMay.setTextSize(22);
-                mMay.setTextColor(Color.parseColor("#303F9F"));
                 mMay.setVisibility(View.GONE);
                 mJune.setTextSize(22);
-                mJune.setTextColor(Color.parseColor("#303F9F"));
                 mJune.setVisibility(View.GONE);
                 mJuly.setTextSize(22);
-                mJuly.setTextColor(Color.parseColor("#303F9F"));
                 mJuly.setVisibility(View.GONE);
                 mAugust.setTextSize(22);
                 mAugust.setTextColor(Color.parseColor("#303F9F"));
@@ -317,26 +296,20 @@ public class Month2Activity extends AppCompatActivity {
                 break;
             case 8:
                 mJanuary.setVisibility(View.GONE);
-                mJanuary.setTextSize(16);
+                mJanuary.setTextSize(22);
                 mFebuary.setTextSize(22);
                 mFebuary.setVisibility(View.GONE);
                 mMarch.setTextSize(22);
-                mMarch.setTextColor(Color.parseColor("#303F9F"));
                 mMarch.setVisibility(View.GONE);
                 mApril.setTextSize(22);
-                mApril.setTextColor(Color.parseColor("#303F9F"));
                 mApril.setVisibility(View.GONE);
                 mMay.setTextSize(22);
-                mMay.setTextColor(Color.parseColor("#303F9F"));
                 mMay.setVisibility(View.GONE);
                 mJune.setTextSize(22);
-                mJune.setTextColor(Color.parseColor("#303F9F"));
                 mJune.setVisibility(View.GONE);
                 mJuly.setTextSize(22);
-                mJuly.setTextColor(Color.parseColor("#303F9F"));
                 mJuly.setVisibility(View.GONE);
                 mAugust.setTextSize(22);
-                mAugust.setTextColor(Color.parseColor("#303F9F"));
                 mAugust.setVisibility(View.GONE);
                 mSeptember.setTextSize(22);
                 mSeptember.setTextColor(Color.parseColor("#303F9F"));
@@ -350,29 +323,22 @@ public class Month2Activity extends AppCompatActivity {
                 break;
             case 9:
                 mJanuary.setVisibility(View.GONE);
-                mJanuary.setTextSize(16);
+                mJanuary.setTextSize(22);
                 mFebuary.setTextSize(22);
                 mFebuary.setVisibility(View.GONE);
                 mMarch.setTextSize(22);
-                mMarch.setTextColor(Color.parseColor("#303F9F"));
                 mMarch.setVisibility(View.GONE);
                 mApril.setTextSize(22);
-                mApril.setTextColor(Color.parseColor("#303F9F"));
                 mApril.setVisibility(View.GONE);
                 mMay.setTextSize(22);
-                mMay.setTextColor(Color.parseColor("#303F9F"));
                 mMay.setVisibility(View.GONE);
                 mJune.setTextSize(22);
-                mJune.setTextColor(Color.parseColor("#303F9F"));
                 mJune.setVisibility(View.GONE);
                 mJuly.setTextSize(22);
-                mJuly.setTextColor(Color.parseColor("#303F9F"));
                 mJuly.setVisibility(View.GONE);
                 mAugust.setTextSize(22);
-                mAugust.setTextColor(Color.parseColor("#303F9F"));
                 mAugust.setVisibility(View.GONE);
                 mSeptember.setTextSize(22);
-                mSeptember.setTextColor(Color.parseColor("#303F9F"));
                 mSeptember.setVisibility(View.GONE);
                 mOctober.setTextSize(22);
                 mOctober.setTextColor(Color.parseColor("#303F9F"));
@@ -384,32 +350,24 @@ public class Month2Activity extends AppCompatActivity {
                 break;
             case 10:
                 mJanuary.setVisibility(View.GONE);
-                mJanuary.setTextSize(16);
+                mJanuary.setTextSize(22);
                 mFebuary.setTextSize(22);
                 mFebuary.setVisibility(View.GONE);
                 mMarch.setTextSize(22);
-                mMarch.setTextColor(Color.parseColor("#303F9F"));
                 mMarch.setVisibility(View.GONE);
                 mApril.setTextSize(22);
-                mApril.setTextColor(Color.parseColor("#303F9F"));
                 mApril.setVisibility(View.GONE);
                 mMay.setTextSize(22);
-                mMay.setTextColor(Color.parseColor("#303F9F"));
                 mMay.setVisibility(View.GONE);
                 mJune.setTextSize(22);
-                mJune.setTextColor(Color.parseColor("#303F9F"));
                 mJune.setVisibility(View.GONE);
                 mJuly.setTextSize(22);
-                mJuly.setTextColor(Color.parseColor("#303F9F"));
                 mJuly.setVisibility(View.GONE);
                 mAugust.setTextSize(22);
-                mAugust.setTextColor(Color.parseColor("#303F9F"));
                 mAugust.setVisibility(View.GONE);
                 mSeptember.setTextSize(22);
-                mSeptember.setTextColor(Color.parseColor("#303F9F"));
                 mSeptember.setVisibility(View.GONE);
                 mOctober.setVisibility(View.GONE);
-                mOctober.setTextColor(Color.parseColor("#3F51B5"));
                 mNovember.setTextSize(22);
                 mNovember.setTextColor(Color.parseColor("#303F9F"));
                 mNovember.setVisibility(View.VISIBLE);
@@ -418,7 +376,7 @@ public class Month2Activity extends AppCompatActivity {
                 break;
             case 11:
 //                     mJanuary.setVisibility(View.GONE);
-                mJanuary.setTextSize(16);
+                mJanuary.setTextSize(22);
                 mFebuary.setTextSize(22);
                 mFebuary.setVisibility(View.GONE);
                 mMarch.setTextSize(22);
@@ -428,25 +386,18 @@ public class Month2Activity extends AppCompatActivity {
                 mApril.setTextColor(Color.parseColor("#303F9F"));
                 mApril.setVisibility(View.GONE);
                 mMay.setTextSize(22);
-                mMay.setTextColor(Color.parseColor("#303F9F"));
                 mMay.setVisibility(View.GONE);
                 mJune.setTextSize(22);
-                mJune.setTextColor(Color.parseColor("#303F9F"));
                 mJune.setVisibility(View.GONE);
                 mJuly.setTextSize(22);
-                mJuly.setTextColor(Color.parseColor("#303F9F"));
                 mJuly.setVisibility(View.GONE);
                 mAugust.setTextSize(22);
-                mAugust.setTextColor(Color.parseColor("#303F9F"));
                 mAugust.setVisibility(View.GONE);
                 mSeptember.setTextSize(22);
-                mSeptember.setTextColor(Color.parseColor("#303F9F"));
                 mSeptember.setVisibility(View.GONE);
 //                mOctober.setTextSize(16);
-                mOctober.setTextColor(Color.parseColor("#3F51B5"));
                 mSeptember.setVisibility(View.GONE);
                 mNovember.setTextSize(22);
-                mNovember.setTextColor(Color.parseColor("#303F9F"));
                 mNovember.setVisibility(View.GONE);
 //                mNovember.setTextColor(Color.parseColor("#3F51B5"));
                 mDecember.setTextSize(22);

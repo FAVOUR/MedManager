@@ -6,32 +6,130 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="wrap_content"
        android:layout_margin="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+
             >
 
         <TextView
-            android:id="@+id/time_of_the_day"
+            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/colorPrimary"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:text="12:00"/>
+            android:layout_height="50dp"
+            android:background="@color/colorAccent"
+            android:gravity="center_vertical|center_horizontal"
+            android:textSize="20dp"
+            android:text="Todays Medication"/>
 
             <TextView
-                android:id="@+id/name_of_drug"
+                android:id="@+id/_name_of_drug"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:text="Name of drug" />
+                android:gravity="center_vertical|center_horizontal"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:text="Panadol" />
+
+            <TextView
+                android:id="@+id/_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+               android:layout_marginTop="7dp"
+                android:text="Kills pains Very fast"
+                android:textStyle="italic"/>
+            <View
+                android:layout_width="250dp"
+                android:layout_height="0.1dp"
+                android:layout_marginTop="3dp"
+                android:background="#ccc7c7"
+                 android:layout_gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal|center_vertical"
+                >
+
+                <ImageView
+                    android:id="@+id/_timing_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_menu_camera" />
+                <TextView
+                    android:id="@+id/_timing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:text="12:00 , 12:00 , 12:00" />
+                <TextView
+                    android:id="@+id/_total_intake_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:text="(3 times)" />
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal|center_vertical"
+            >
+
+            <TextView
+                android:id="@+id/_quantity_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantity : " />
+
+            <TextView
+                android:id="@+id/_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="7 dose" />
+
+            </LinearLayout>
+            <View
+                android:layout_width="200dp"
+                android:layout_height="0.1dp"
+                android:layout_marginTop="3dp"
+                android:background="#ccc7c7"
+                android:layout_gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal|center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/_endate_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Medication Ends : " />
+
+                <TextView
+                    android:id="@+id/_endate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="2 Jul, 2018" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

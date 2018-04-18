@@ -1,8 +1,10 @@
 package com.example.olijefavour.med_manager;
 
 import android.app.LoaderManager;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +16,9 @@ public class EachDayActivity extends AppCompatActivity  implements LoaderManager
     private ListView medListView;
     private int LOADER_ID=0;
     private EachDayAdapter mCursorAdapter;
+    /** Content URI for the existing pet (null if it's a new pet) */
+    private Uri mCurrentMedManagerUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +27,8 @@ public class EachDayActivity extends AppCompatActivity  implements LoaderManager
 
         medListView = (ListView)findViewById(R.id.lv_list);
 
-
+        Intent intent = getIntent();
+        mCurrentMedManagerUri = intent.getData();
 //      COMPLETED (4) Pass in this again as the ForecastAdapter now requires a Context
         /*
          * The ForecastAdapter is responsible for linking our weather data with the Views that
@@ -50,17 +56,30 @@ public class EachDayActivity extends AppCompatActivity  implements LoaderManager
         getLoaderManager().initLoader(LOADER_ID, null, this);
     }
 
+
+    @Override
+    public void onBackPressed() {
+        // If the data hasn't changed, continue with handling back button press
+
+            super.onBackPressed();
+            return;
+        }
+
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         // Define a projection that specifies the columns from the table we care about.
         String[] projection = {
                 MedManagerContract.MedManagerEntry._ID,
                 MedManagerContract.MedManagerEntry.COLUMN_MEDICATION_NAME,
-                MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION};
+                MedManagerContract.MedManagerEntry.COLUMN_MED_DESCRIPTION,
+                MedManagerContract.MedManagerEntry. COLUMN_DOSAGE,
+                MedManagerContract.MedManagerEntry. COLUMN_MED_END_DATE,
+                MedManagerContract.MedManagerEntry.COLUMN_TIME};
+
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new android.content.CursorLoader(this,   // Parent activity context
-                MedManagerContract.MedManagerEntry.CONTENT_URI,   // Provider content URI to query
+                mCurrentMedManagerUri,// Provider content URI to query
                 projection,             // Columns to include in the resulting Cursor
                 null,                   // No selection clause
                 null,                   // No selection arguments

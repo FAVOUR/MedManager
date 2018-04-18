@@ -16,13 +16,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".CatalogActivity">
 
-    <item
-        android:id="@+id/action_insert_dummy_data"
-        android:title="@string/action_insert_dummy_data"
-        app:showAsAction="never" />
+    <item  android:id="@+id/search"
+        app:showAsAction="always"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:title="Search" />
 
-    <item
-        android:id="@+id/action_delete_all_entries"
-        android:title="@string/action_delete_all_entries"
-        app:showAsAction="never" />
 </menu>

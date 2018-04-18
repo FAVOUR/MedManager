@@ -4,7 +4,7 @@
 <resources>
     <!-- These are the options displayed in the gender drop-down Spinner -->
     <string-array name="array_frequency">
-        <item>@string/frequency</item>
+        <item>@string/default_frequency</item>
         <item>@string/once_a_day</item>
         <item>@string/twice_a_day</item>
         <item>@string/trice_a_day</item>
