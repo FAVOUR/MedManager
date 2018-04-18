@@ -15,12 +15,23 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Welcome_activity extends AppCompatActivity {
 
+    
+      private FirebaseAuth mAuth;
+
+    private FirebaseDatabase mFireBaseDataBase;
+    private DatabaseReference mDataBaseReference;
+    private FirebaseAuth.AuthStateListener mFirebaseAuthStateListener;
+
+
+    public static final String ANNONYMUS="Annonymus";
+        
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_activity);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
+      
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
